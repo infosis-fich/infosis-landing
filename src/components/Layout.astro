@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Analytics from "@vercel/analytics/astro";
 
 interface Props {
   title?: string;
@@ -84,6 +85,7 @@ const structuredData = {
     <link rel="icon" href="/escudo-infosis.png" type="image/png" />
     <link rel="shortcut icon" href="/escudo-infosis.png" type="image/png" />
     <title>{title}</title>
+    <Analytics />
     <script
       type="application/ld+json"
       set:html={JSON.stringify(structuredData)}
