@@ -28,11 +28,6 @@ export const carreras: Carrera[] = [
         nombre: "Práctica de computación",
       },
       {
-        src: "/lab-computo/laboratorio-03.webp",
-        alt: "Actividad formativa de informática.",
-        nombre: "Actividad formativa",
-      },
-      {
         src: "/lab-capacitacion/capacitacion-03.webp",
         alt: "Estudiantes durante una capacitación tecnológica.",
         nombre: "Capacitación tecnológica",
@@ -73,11 +68,6 @@ export const carreras: Carrera[] = [
         src: "/lab-capacitacion/capacitacion-02.webp",
         alt: "Actividad de capacitación tecnológica.",
         nombre: "Capacitación tecnológica",
-      },
-      {
-        src: "/lab-computo/laboratorio-06.webp",
-        alt: "Trabajo práctico en el laboratorio de cómputo.",
-        nombre: "Trabajo práctico",
       },
     ],
     areas: [
