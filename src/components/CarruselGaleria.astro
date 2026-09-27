@@ -40,7 +40,7 @@ const { imagenes, indiceInicial, etiqueta } = Astro.props;
               loading="lazy"
               decoding="async"
             />
-            <span class="absolute inset-x-0 bottom-0 bg-brand-deep/85 px-4 py-3 text-sm font-semibold text-ice">
+            <span class="absolute inset-x-0 bottom-0 bg-brand-deep/85 px-4 py-3 text-sm font-semibold text-ice max-[720px]:px-2 max-[720px]:py-2 max-[720px]:text-xs">
               {imagen.nombre}
             </span>
           </button>
@@ -52,7 +52,7 @@ const { imagenes, indiceInicial, etiqueta } = Astro.props;
     imagenes.length > 1 && (
       <>
         <button
-          class="absolute top-1/2 left-3 z-10 grid size-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full border border-sky/30 bg-brand-deep/85 text-3xl text-ice shadow-lg transition-colors hover:bg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky"
+          class="absolute top-1/2 left-3 z-10 grid size-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full border border-sky/30 bg-brand-deep/85 text-3xl text-ice shadow-lg transition-colors hover:bg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky max-[720px]:left-1 max-[720px]:size-9 max-[720px]:text-2xl"
           type="button"
           data-galeria-anterior
           aria-label={`Imagen anterior de ${etiqueta}`}
@@ -60,7 +60,7 @@ const { imagenes, indiceInicial, etiqueta } = Astro.props;
           <span aria-hidden="true">‹</span>
         </button>
         <button
-          class="absolute top-1/2 right-3 z-10 grid size-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full border border-sky/30 bg-brand-deep/85 text-3xl text-ice shadow-lg transition-colors hover:bg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky"
+          class="absolute top-1/2 right-3 z-10 grid size-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full border border-sky/30 bg-brand-deep/85 text-3xl text-ice shadow-lg transition-colors hover:bg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky max-[720px]:right-1 max-[720px]:size-9 max-[720px]:text-2xl"
           type="button"
           data-galeria-siguiente
           aria-label={`Imagen siguiente de ${etiqueta}`}

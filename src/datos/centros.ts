@@ -7,6 +7,7 @@ export interface Centro {
   nombre: string;
   sigla?: string;
   resumen: string;
+  etiquetaContacto?: string;
   logo: string;
   imagen: string;
   textoAlternativoImagen: string;
@@ -17,7 +18,8 @@ export const centros: Centro[] = [
   {
     nombre: "Laboratorio de Cómputo",
     logo: "/centro-computo.png",
-    resumen: "Prácticas, cursos presenciales y actividades académicas.",
+    resumen:
+      "Espacio para prácticas, cursos presenciales y actividades académicas con equipos informáticos.",
     imagen: "/lab-computo/laboratorio-02.webp",
     textoAlternativoImagen:
       "Vista del Laboratorio de Cómputo con sus estaciones de trabajo.",
@@ -30,7 +32,8 @@ export const centros: Centro[] = [
     nombre: "Laboratorio de Hardware y Redes",
     logo: "/centro-hardware.png",
     resumen:
-      "Mantenimiento de equipos, soporte de software y redes, respaldo de datos y asesoría TIC.",
+      "Reparación y mantenimiento de equipos, instalación de software, configuración de redes, respaldo de datos y soporte TIC.",
+    etiquetaContacto: "Contactar sus servicios",
     imagen: "/lab-hardware/hardware-04.webp",
     textoAlternativoImagen:
       "Estudiantes revisan componentes de computadoras durante una práctica de hardware.",
@@ -43,7 +46,7 @@ export const centros: Centro[] = [
     nombre: "Centro de Investigación y Capacitación",
     logo: "/centro-capacitacion.png",
     resumen:
-      "Investigación y capacitación en informática y sistemas mediante proyectos y cursos.",
+      "Impulsa proyectos de investigación y capacitación en informática y sistemas mediante cursos y actividades especializadas.",
     imagen: "/lab-capacitacion/capacitacion-03.webp",
     textoAlternativoImagen:
       "Estudiantes participan en una sesión de capacitación en un laboratorio de cómputo.",

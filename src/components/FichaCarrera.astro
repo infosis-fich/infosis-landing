@@ -35,12 +35,9 @@ const { carrera, semestres } = Astro.props;
   <div
     class="contenedor-pagina relative z-10 grid grid-cols-[1.2fr_.8fr] items-center gap-12 py-[clamp(4rem,8vw,7rem)] max-[820px]:grid-cols-1 max-[820px]:gap-8"
   >
-    <div>
-      <p
-        class="mb-5 text-[.75rem] font-bold tracking-[.14em] text-sky uppercase"
-      >
-        Dirección de Carrera · FICH · UAGRM
-      </p>
+    <div
+      class="max-[820px]:flex max-[820px]:flex-col max-[820px]:items-center max-[820px]:text-center"
+    >
       <h1
         class="mb-5 font-heading text-[clamp(2.7rem,6vw,5rem)] font-semibold leading-[1.05] tracking-[-.025em]"
         id="carrera-titulo"
@@ -115,9 +112,9 @@ const { carrera, semestres } = Astro.props;
 >
   <div class="contenedor-pagina">
     <EncabezadoSeccion
-      eyebrow="Al concluir tus estudios"
-      titulo="Modalidades de titulación."
-      descripcion="Las modalidades se comparten entre Ingeniería en Sistemas e Ingeniería Informática. Consulta a la Dirección para conocer los procedimientos aplicables."
+      eyebrow="Titulación"
+      titulo="Modalidades para obtener tu título."
+      descripcion="Conoce las opciones disponibles para ambas carreras y consulta sus requisitos con la Dirección."
       id="titulacion-carrera-titulo"
       tono="oscuro"
     />

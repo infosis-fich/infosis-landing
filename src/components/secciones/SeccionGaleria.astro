@@ -45,15 +45,17 @@ const seccionesConIndice = secciones.map((seccion) => {
     <EncabezadoSeccion
       eyebrow="Nuestra comunidad"
       titulo="Aprendemos haciendo."
-      descripcion="Una mirada a las actividades, laboratorios y espacios que forman parte de la experiencia en Informática y Sistemas."
+      descripcion="Conoce nuestras aulas, laboratorios y actividades."
       id="galeria-titulo"
     />
-    <div class="grid grid-cols-2 gap-8 max-[720px]:grid-cols-1">
+    <div
+      class="grid grid-cols-2 gap-8 max-[720px]:grid-cols-1 max-[720px]:gap-4"
+    >
       {
         seccionesConIndice.map(
           ({ nombre, imagenes, indiceInicial: inicio }) => (
             <div>
-              <h3 class="mb-4 font-display text-lg font-bold text-ink">
+              <h3 class="mb-4 font-display text-lg font-bold text-ink max-[720px]:mb-2 max-[720px]:text-base">
                 {nombre}
               </h3>
               <CarruselGaleria
