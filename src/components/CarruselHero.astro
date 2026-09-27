@@ -45,7 +45,7 @@ const { imagenes, id, labelledby } = Astro.props;
   </div>
   <slot />
   <div
-    class="pointer-events-none absolute inset-x-0 top-1/2 z-20 flex -translate-y-1/2 items-center justify-between px-[clamp(1rem,4vw,3rem)]"
+    class="pointer-events-none absolute inset-x-0 top-1/2 z-20 flex -translate-y-1/2 items-center justify-between px-[clamp(1rem,4vw,3rem)] max-[820px]:hidden"
   >
     <button
       class="pointer-events-auto grid size-10 cursor-pointer place-items-center rounded-full border border-sky/30 bg-brand-deep/65 text-ice backdrop-blur-sm transition-colors hover:bg-brand-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky"
@@ -83,7 +83,7 @@ const { imagenes, id, labelledby } = Astro.props;
     </button>
   </div>
   <div
-    class="forma-acento absolute bottom-7 left-1/2 z-20 flex -translate-x-1/2 items-center gap-3 border border-sky/25 bg-brand-deep/65 px-4 py-2 backdrop-blur-sm max-[820px]:bottom-5"
+    class="forma-acento absolute bottom-7 left-1/2 z-20 flex -translate-x-1/2 items-center gap-3 border border-sky/25 bg-brand-deep/65 px-4 py-2 backdrop-blur-sm max-[820px]:hidden"
     role="group"
     aria-label="Elegir imagen"
   >

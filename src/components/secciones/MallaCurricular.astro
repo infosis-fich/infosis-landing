@@ -19,8 +19,8 @@ const { carrera, semestres } = Astro.props;
   <div class="contenedor-pagina">
     <EncabezadoSeccion
       eyebrow="Plan de estudios"
-      titulo="Tu recorrido, semestre a semestre."
-      descripcion={`Explora las materias de ${carrera.nombre} y consulta el documento original de la malla curricular.`}
+      titulo="Conoce tu plan de estudios."
+      descripcion="Consulta las materias de cada semestre y revisa la malla curricular oficial."
       id="plan-titulo"
     />
     <a
@@ -29,7 +29,7 @@ const { carrera, semestres } = Astro.props;
       target="_blank"
       rel="noreferrer"
     >
-      Abrir malla completa (PDF) <span aria-hidden="true">↗</span>
+      Ver malla curricular oficial (PDF) <span aria-hidden="true">↗</span>
     </a>
     <div class="grid grid-cols-2 gap-3 max-[720px]:grid-cols-1">
       {

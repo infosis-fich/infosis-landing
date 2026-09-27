@@ -3,16 +3,14 @@ import { siGithub, siTiktok, siWhatsapp } from "simple-icons";
 import { carreras } from "../datos/carreras";
 ---
 
-<footer class="border-t border-line bg-paper py-14 pb-8 text-ink" id="contacto">
+<footer
+  class="border-t border-line bg-paper py-14 pb-8 text-ink max-[600px]:py-10 max-[600px]:pb-6"
+  id="contacto"
+>
   <div
-    class="contenedor-pagina grid grid-cols-[1.25fr_.9fr_1fr_1fr] items-start gap-8 max-[900px]:grid-cols-2 max-[600px]:grid-cols-1"
+    class="contenedor-pagina grid grid-cols-[1.25fr_.9fr_1fr_1fr] items-start gap-8 max-[900px]:grid-cols-2 max-[600px]:gap-6 max-[600px]:grid-cols-2 max-[420px]:grid-cols-1"
   >
-    <div>
-      <p
-        class="mb-3 text-[.75rem] font-bold tracking-[.14em] text-sky uppercase"
-      >
-        FICH · UAGRM
-      </p>
+    <div class="max-[600px]:col-span-2 max-[420px]:col-span-1">
       <div class="mb-4 flex items-start gap-3">
         <img
           class="size-10 shrink-0 object-contain"
@@ -34,9 +32,14 @@ import { carreras } from "../datos/carreras";
       </p>
     </div>
 
-    <nav aria-label="Enlaces del sitio">
+    <nav
+      class="max-[600px]:col-span-2 max-[420px]:col-span-1"
+      aria-label="Enlaces del sitio"
+    >
       <h3 class="mb-4 font-display text-base font-bold">Explora</h3>
-      <ul class="m-0 grid list-none gap-3 p-0 text-sm text-muted">
+      <ul
+        class="m-0 grid list-none gap-3 p-0 text-sm text-muted max-[600px]:grid-cols-2 max-[420px]:grid-cols-1 max-[600px]:gap-x-6 max-[600px]:gap-y-2.5"
+      >
         <li>
           <a class="transition-colors hover:text-sky" href="/#carreras"
             >Carreras</a
@@ -96,7 +99,7 @@ import { carreras } from "../datos/carreras";
       >
         <a
           class="flex items-center gap-2 transition-colors hover:text-sky"
-          href="https://wa.me/59176660753?text=Hola%2C%20escribo%20desde%20el%20sitio%20oficial%20de%20la%20Direcci%C3%B3n%20de%20Carrera%20de%20Inform%C3%A1tica%20y%20Sistemas%20de%20la%20FICH.%20Requiero%20informaci%C3%B3n%20sobre%20el%20proceso%20de%20admisi%C3%B3n."
+          href="https://wa.me/59176660753?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20los%20requisitos%2C%20fechas%20y%20proceso%20de%20admisi%C3%B3n%20para%20Ingenier%C3%ADa%20Inform%C3%A1tica%20e%20Ingenier%C3%ADa%20en%20Sistemas."
           target="_blank"
           rel="noreferrer"
         >
@@ -137,7 +140,7 @@ import { carreras } from "../datos/carreras";
     </div>
 
     <p
-      class="col-span-full mt-2 mb-0 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 border-t border-line pt-6 text-center text-[.8rem] text-muted max-[600px]:col-span-1"
+      class="col-span-full mt-2 mb-0 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 border-t border-line pt-6 text-center text-[.8rem] text-muted max-[600px]:col-span-2 max-[420px]:col-span-1"
     >
       <span>© {new Date().getFullYear()}</span>
       <span aria-hidden="true">·</span>

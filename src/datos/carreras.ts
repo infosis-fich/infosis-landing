@@ -15,7 +15,7 @@ export const carreras: Carrera[] = [
     ruta: "/carreras/informatica",
     nombre: "Ingeniería Informática",
     resumen:
-      "Ofrece formación en computación, programación, software, redes e investigación, de acuerdo con las áreas que muestra su malla curricular.",
+      "Formación en software, inteligencia artificial, datos, redes y seguridad.",
     imagenesHero: [
       {
         src: "/lab-computo/laboratorio-01.webp",
@@ -26,11 +26,6 @@ export const carreras: Carrera[] = [
         src: "/lab-computo/laboratorio-02.webp",
         alt: "Práctica de computación en laboratorio.",
         nombre: "Práctica de computación",
-      },
-      {
-        src: "/lab-computo/laboratorio-03.webp",
-        alt: "Actividad formativa de informática.",
-        nombre: "Actividad formativa",
       },
       {
         src: "/lab-capacitacion/capacitacion-03.webp",
@@ -48,8 +43,7 @@ export const carreras: Carrera[] = [
       "Desarrollo de software y aplicaciones",
       "Inteligencia artificial y ciencia de datos",
       "Redes, ciberseguridad e infraestructura",
-      "Empresas e instituciones públicas y privadas",
-      "Investigación, innovación y emprendimiento tecnológico",
+      "Empresas, investigación e innovación tecnológica",
     ],
     archivoMalla: "/documentos/malla-ingenieria-informatica.pdf",
   },
@@ -58,7 +52,7 @@ export const carreras: Carrera[] = [
     ruta: "/carreras/sistemas",
     nombre: "Ingeniería en Sistemas",
     resumen:
-      "Forma profesionales capaces de aplicar tecnologías de información a la gestión de organizaciones, los sistemas de información y la toma de decisiones.",
+      "Formación en software, sistemas de información, redes y gestión tecnológica.",
     imagenesHero: [
       {
         src: "/general/comunidad-fich.webp",
@@ -75,11 +69,6 @@ export const carreras: Carrera[] = [
         alt: "Actividad de capacitación tecnológica.",
         nombre: "Capacitación tecnológica",
       },
-      {
-        src: "/lab-computo/laboratorio-06.webp",
-        alt: "Trabajo práctico en el laboratorio de cómputo.",
-        nombre: "Trabajo práctico",
-      },
     ],
     areas: [
       "Desarrollo de software",
@@ -88,11 +77,10 @@ export const carreras: Carrera[] = [
       "Gestión y toma de decisiones",
     ],
     aplicaciones: [
-      "Empresas e instituciones públicas y privadas",
-      "Entidades financieras y aseguradoras",
-      "Telecomunicaciones",
-      "Sector agropecuario e industrial",
-      "Emprendimientos y consultoría tecnológica",
+      "Desarrollo de software y sistemas de información",
+      "Gestión tecnológica y toma de decisiones",
+      "Redes, telecomunicaciones y soporte",
+      "Sector productivo, entidades y consultoría tecnológica",
     ],
     archivoMalla: "/documentos/malla-ingenieria-sistemas.pdf",
   },

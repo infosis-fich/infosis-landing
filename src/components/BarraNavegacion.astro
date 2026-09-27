@@ -22,37 +22,52 @@ const esInicio = Astro.url.pathname === "/";
     class="textura-tecnica textura-lateral pointer-events-none absolute inset-y-0 right-0 z-0 hidden md:block"
     aria-hidden="true"></span>
   <div
-    class="contenedor-pagina relative z-10 flex min-h-[72px] items-center justify-between gap-6 max-[820px]:min-h-0 max-[820px]:flex-col max-[820px]:items-start max-[820px]:gap-1.5 max-[820px]:py-2"
+    class="contenedor-pagina relative z-10 flex min-h-[72px] items-center justify-between gap-6 max-[820px]:min-h-0 max-[820px]:flex-col max-[820px]:items-stretch max-[820px]:gap-0 max-[820px]:py-2"
   >
-    <a
-      class="inline-flex items-center gap-3 font-heading text-base font-bold leading-[1.1] tracking-[-.025em]"
-      href={esInicio ? "#inicio" : "/"}
-      aria-label="Dirección de Carrera de Informática y Sistemas, inicio"
-    >
-      <img
-        class="size-11 object-contain"
-        src="/escudo-infosis.png"
-        alt=""
-        width="96"
-        height="96"
-      />
-      <span>
-        Informática y Sistemas
-        <small
-          class="mt-1 block font-sans text-[.68rem] font-medium tracking-[.06em] text-muted"
-        >
-          FICH · UAGRM
-        </small>
-      </span>
-    </a>
+    <div class="flex items-center justify-between gap-3 max-[820px]:min-h-11">
+      <a
+        class="inline-flex min-w-0 items-center gap-3 font-heading text-base font-bold leading-[1.1] tracking-[-.025em]"
+        href={esInicio ? "#inicio" : "/"}
+        aria-label="Dirección de Carrera de Informática y Sistemas, inicio"
+      >
+        <img
+          class="size-11 shrink-0 object-contain max-[420px]:size-10"
+          src="/escudo-infosis.png"
+          alt=""
+          width="96"
+          height="96"
+        />
+        <span class="min-w-0">
+          <span class="block truncate">Informática y Sistemas</span>
+          <small
+            class="mt-1 block font-sans text-[.68rem] font-medium tracking-[.06em] text-muted"
+          >
+            FICH · UAGRM
+          </small>
+        </span>
+      </a>
+      <button
+        class="hidden size-11 shrink-0 items-center justify-center rounded-md border border-line bg-transparent text-ice transition-colors hover:border-sky hover:text-sky focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent aria-[expanded=true]:border-sky aria-[expanded=true]:bg-sky aria-[expanded=true]:text-brand-deep max-[820px]:inline-flex"
+        type="button"
+        aria-controls="navegacion-principal"
+        aria-expanded="false"
+        aria-label="Abrir menú de navegación"
+        data-menu-toggle
+      >
+        <span class="relative block size-5" aria-hidden="true" data-menu-icon
+        ></span>
+      </button>
+    </div>
     <nav
-      class="flex items-center gap-[clamp(.9rem,2vw,1.5rem)] text-sm font-medium text-ink max-[820px]:w-full max-[820px]:gap-5 max-[820px]:overflow-x-auto max-[820px]:pb-0.5 max-[820px]:text-[.825rem]"
+      id="navegacion-principal"
+      class="flex items-center gap-[clamp(.9rem,2vw,1.5rem)] text-sm font-medium text-ink max-[820px]:hidden max-[820px]:mt-2 max-[820px]:w-full max-[820px]:flex-col max-[820px]:items-stretch max-[820px]:gap-0 max-[820px]:mb-4 max-[820px]:text-[.9rem]"
       aria-label="Navegación principal"
+      data-mobile-menu
     >
       {
         enlaces.map(([href, texto]) => (
           <a
-            class="whitespace-nowrap py-2 transition-colors duration-200 hover:text-sky"
+            class="whitespace-nowrap py-2.5 transition-colors duration-200 hover:text-sky max-[820px]:border-b max-[820px]:border-line/50"
             href={esInicio ? href : `/${href}`}
           >
             {texto}
@@ -60,10 +75,89 @@ const esInicio = Astro.url.pathname === "/";
         ))
       }
       <a
-        class="boton-principal whitespace-nowrap px-3.5 py-2 text-sm max-[820px]:px-3 max-[820px]:py-1.5 max-[820px]:text-[.825rem]"
+        class="boton-principal whitespace-nowrap px-3.5 py-2 text-sm max-[820px]:mt-3 max-[820px]:justify-center max-[820px]:px-3 max-[820px]:py-2.5 max-[820px]:text-[.9rem]"
         href={esInicio ? "#admision" : "/#admision"}
         >Admisión <span aria-hidden="true">↗</span></a
       >
     </nav>
   </div>
 </header>
+
+<script>
+  const toggle = document.querySelector<HTMLElement>("[data-menu-toggle]");
+  const menu = document.querySelector<HTMLElement>("[data-mobile-menu]");
+
+  if (toggle && menu) {
+    const setMenuState = (open: boolean) => {
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute(
+        "aria-label",
+        open ? "Cerrar menú de navegación" : "Abrir menú de navegación",
+      );
+      menu.classList.toggle("hidden", !open);
+      menu.classList.toggle("max-[820px]:hidden", !open);
+    };
+
+    toggle.addEventListener("click", () => {
+      setMenuState(toggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setMenuState(false));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (
+        event.key === "Escape" &&
+        toggle.getAttribute("aria-expanded") === "true"
+      ) {
+        setMenuState(false);
+        toggle.focus();
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 820) setMenuState(false);
+    });
+  }
+</script>
+
+<style>
+  [data-menu-icon]::before,
+  [data-menu-icon]::after {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 1.25rem;
+    height: 0.125rem;
+    border-radius: 999px;
+    background: currentColor;
+    content: "";
+    transition:
+      transform 300ms ease,
+      opacity 300ms ease,
+      box-shadow 300ms ease;
+  }
+
+  [data-menu-icon]::before {
+    transform: translateY(-0.5rem);
+    box-shadow:
+      0 0.5rem currentColor,
+      0 1rem currentColor;
+  }
+
+  [data-menu-icon]::after {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+
+  [data-menu-toggle][aria-expanded="true"] [data-menu-icon]::before {
+    transform: translateY(-50%) rotate(45deg);
+    box-shadow: none;
+  }
+
+  [data-menu-toggle][aria-expanded="true"] [data-menu-icon]::after {
+    opacity: 1;
+    transform: translateY(-50%) rotate(-45deg);
+  }
+</style>

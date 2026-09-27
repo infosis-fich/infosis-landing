@@ -21,7 +21,7 @@ export const eventos: Evento[] = [
     diaInicio: "30",
     mesInicio: "SEP",
     descripcion:
-      "Un espacio de ciencia, innovación, tecnología, desarrollo y emprendimiento.",
+      "Ciencia, innovación, tecnología y emprendimiento en comunidad.",
     tipo: "Participación institucional",
   },
   {
@@ -34,7 +34,7 @@ export const eventos: Evento[] = [
     diaInicio: "30",
     mesInicio: "SEP",
     descripcion:
-      "Primera edición presencial dedicada al desarrollo web con agentes de inteligencia artificial.",
+      "Evento presencial para aprender y crear proyectos web con inteligencia artificial.",
     tipo: "Evento presencial",
   },
 ];
