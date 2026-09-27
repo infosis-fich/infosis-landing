@@ -1,0 +1,44 @@
+---
+interface Props {
+  eyebrow: string;
+  titulo: string;
+  descripcion?: string;
+  id: string;
+  tono?: "claro" | "oscuro";
+}
+
+const { eyebrow, titulo, descripcion, id, tono = "claro" } = Astro.props;
+const oscuro = tono === "oscuro";
+---
+
+<div class="mb-7">
+  <span
+    class:list={[
+      "forma-acento mb-5 inline-flex items-center border px-3 py-2 text-xs font-bold tracking-[.12em] uppercase",
+      oscuro
+        ? "border-sky/30 bg-sky/10 text-sky"
+        : "border-sky/30 bg-sky/10 text-sky",
+    ]}>{eyebrow}</span
+  >
+  <h2
+    class:list={[
+      "mb-4 max-w-[1100px] font-heading text-[clamp(2rem,4vw,3.4rem)] font-semibold leading-[1.1] tracking-[-.025em]",
+      oscuro && "text-ice",
+    ]}
+    id={id}
+  >
+    {titulo}
+  </h2>
+  {
+    descripcion && (
+      <p
+        class:list={[
+          "mb-0 max-w-[640px] text-base leading-7",
+          oscuro ? "text-ice/75" : "text-muted",
+        ]}
+      >
+        {descripcion}
+      </p>
+    )
+  }
+</div>

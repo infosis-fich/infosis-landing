@@ -1,0 +1,99 @@
+export interface Carrera {
+  id: string;
+  ruta: string;
+  nombre: string;
+  resumen: string;
+  imagenesHero: { src: string; alt: string; nombre: string }[];
+  areas: string[];
+  aplicaciones?: string[];
+  archivoMalla: string;
+}
+
+export const carreras: Carrera[] = [
+  {
+    id: "informatica",
+    ruta: "/carreras/informatica",
+    nombre: "Ingeniería Informática",
+    resumen:
+      "Ofrece formación en computación, programación, software, redes e investigación, de acuerdo con las áreas que muestra su malla curricular.",
+    imagenesHero: [
+      {
+        src: "/lab-computo/laboratorio-01.webp",
+        alt: "Estudiantes en el laboratorio de cómputo.",
+        nombre: "Laboratorio de cómputo",
+      },
+      {
+        src: "/lab-computo/laboratorio-02.webp",
+        alt: "Práctica de computación en laboratorio.",
+        nombre: "Práctica de computación",
+      },
+      {
+        src: "/lab-computo/laboratorio-03.webp",
+        alt: "Actividad formativa de informática.",
+        nombre: "Actividad formativa",
+      },
+      {
+        src: "/lab-capacitacion/capacitacion-03.webp",
+        alt: "Estudiantes durante una capacitación tecnológica.",
+        nombre: "Capacitación tecnológica",
+      },
+    ],
+    areas: [
+      "Programación y desarrollo de software",
+      "Inteligencia artificial y aprendizaje automático",
+      "Redes, seguridad e infraestructura",
+      "Datos y sistemas de información",
+    ],
+    aplicaciones: [
+      "Desarrollo de software y aplicaciones",
+      "Inteligencia artificial y ciencia de datos",
+      "Redes, ciberseguridad e infraestructura",
+      "Empresas e instituciones públicas y privadas",
+      "Investigación, innovación y emprendimiento tecnológico",
+    ],
+    archivoMalla: "/documentos/malla-ingenieria-informatica.pdf",
+  },
+  {
+    id: "sistemas",
+    ruta: "/carreras/sistemas",
+    nombre: "Ingeniería en Sistemas",
+    resumen:
+      "Forma profesionales capaces de aplicar tecnologías de información a la gestión de organizaciones, los sistemas de información y la toma de decisiones.",
+    imagenesHero: [
+      {
+        src: "/general/comunidad-fich.webp",
+        alt: "Comunidad universitaria en una actividad institucional.",
+        nombre: "Comunidad universitaria",
+      },
+      {
+        src: "/general/clase-universitaria.webp",
+        alt: "Clase universitaria de informática y sistemas.",
+        nombre: "Clase universitaria",
+      },
+      {
+        src: "/lab-capacitacion/capacitacion-02.webp",
+        alt: "Actividad de capacitación tecnológica.",
+        nombre: "Capacitación tecnológica",
+      },
+      {
+        src: "/lab-computo/laboratorio-06.webp",
+        alt: "Trabajo práctico en el laboratorio de cómputo.",
+        nombre: "Trabajo práctico",
+      },
+    ],
+    areas: [
+      "Desarrollo de software",
+      "Datos y sistemas de información",
+      "Redes y sistemas operativos",
+      "Gestión y toma de decisiones",
+    ],
+    aplicaciones: [
+      "Empresas e instituciones públicas y privadas",
+      "Entidades financieras y aseguradoras",
+      "Telecomunicaciones",
+      "Sector agropecuario e industrial",
+      "Emprendimientos y consultoría tecnológica",
+    ],
+    archivoMalla: "/documentos/malla-ingenieria-sistemas.pdf",
+  },
+];

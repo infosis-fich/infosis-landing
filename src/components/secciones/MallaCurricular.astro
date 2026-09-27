@@ -1,0 +1,91 @@
+---
+import type { Carrera } from "../../datos/carreras";
+import type { Semestre } from "../../datos/mallas";
+import EncabezadoSeccion from "../EncabezadoSeccion.astro";
+
+interface Props {
+  carrera: Carrera;
+  semestres: Semestre[];
+}
+
+const { carrera, semestres } = Astro.props;
+---
+
+<section
+  class="bg-tint py-[clamp(4rem,8vw,7rem)]"
+  id="plan-estudios"
+  aria-labelledby="plan-titulo"
+>
+  <div class="contenedor-pagina">
+    <EncabezadoSeccion
+      eyebrow="Plan de estudios"
+      titulo="Tu recorrido, semestre a semestre."
+      descripcion={`Explora las materias de ${carrera.nombre} y consulta el documento original de la malla curricular.`}
+      id="plan-titulo"
+    />
+    <a
+      class="boton-principal mb-7"
+      href={carrera.archivoMalla}
+      target="_blank"
+      rel="noreferrer"
+    >
+      Abrir malla completa (PDF) <span aria-hidden="true">↗</span>
+    </a>
+    <div class="grid grid-cols-2 gap-3 max-[720px]:grid-cols-1">
+      {
+        semestres.map((semestre, indice) => (
+          <details
+            class:list={[
+              "group border bg-paper",
+              indice < 2 ? "border-brand/40" : "border-line",
+            ]}
+            open={indice < 2}
+          >
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-semibold text-ink marker:hidden">
+              <span>
+                {semestre.nombre}
+                <small class="ml-2 font-normal text-muted">
+                  {semestre.materias.length} materias
+                </small>
+              </span>
+              <span
+                class="grid size-8 shrink-0 place-items-center rounded-full border border-line text-lg text-sky transition-transform group-open:rotate-45"
+                aria-hidden="true"
+              >
+                +
+              </span>
+            </summary>
+            <ul class="m-0 grid list-none gap-2 border-t border-line px-5 py-4 text-sm leading-6 text-muted">
+              {semestre.materias.map((materia, materiaIndice) => (
+                <li class="flex items-start gap-3">
+                  <span
+                    class="mt-0.5 min-w-6 text-xs font-bold tracking-wider text-sky"
+                    aria-hidden="true"
+                  >
+                    {String(materiaIndice + 1).padStart(2, "0")}
+                  </span>
+                  <span>{materia}</span>
+                </li>
+              ))}
+            </ul>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const semestres = Array.from(
+    document.querySelectorAll<HTMLDetailsElement>("#plan-estudios details"),
+  );
+
+  semestres.forEach((semestre, indice) => {
+    const pareja = semestres[indice % 2 === 0 ? indice + 1 : indice - 1];
+    if (!pareja) return;
+
+    semestre.querySelector("summary")?.addEventListener("click", () => {
+      pareja.open = !semestre.open;
+    });
+  });
+</script>

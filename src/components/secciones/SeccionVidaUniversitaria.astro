@@ -1,0 +1,41 @@
+---
+import EncabezadoSeccion from "../EncabezadoSeccion.astro";
+
+const oportunidades = [
+  "Auxiliaturas de docencia y laboratorio",
+  "Becas de trabajo y comedor",
+  "Convenios interinstitucionales y programas de pasantías",
+  "Aulas equipadas con tecnología multimedia",
+  "Biblioteca, medios audiovisuales y seguro universitario",
+  "Seminarios y cursos",
+];
+---
+
+<section
+  class="border-y border-line bg-tint py-[clamp(3.5rem,5vw,4.5rem)]"
+  id="vida-universitaria"
+  aria-labelledby="vida-titulo"
+>
+  <div class="contenedor-pagina">
+    <EncabezadoSeccion
+      eyebrow="Más oportunidades"
+      titulo="Aprender también sucede fuera del aula."
+      descripcion="La vida universitaria incluye apoyos, servicios y actividades que acompañan la formación profesional."
+      id="vida-titulo"
+    />
+    <ul
+      class="m-0 grid list-none grid-cols-2 gap-x-6 gap-y-0 p-0 max-[720px]:grid-cols-1"
+    >
+      {
+        oportunidades.map((oportunidad) => (
+          <li class="flex gap-3 border-b border-line py-4 leading-6 text-ink">
+            <span class="font-bold text-sky" aria-hidden="true">
+              ↗
+            </span>
+            {oportunidad}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

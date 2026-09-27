@@ -1,0 +1,97 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+}
+
+const {
+  title = "Ingeniería Informática e Ingeniería en Sistemas · FICH · UAGRM",
+  description = "Conoce Ingeniería Informática e Ingeniería en Sistemas de la FICH · UAGRM: carreras, centros, actividades, oportunidades y admisión en Camiri.",
+  image = "/portada.webp",
+  imageAlt = "Dirección de Carrera de Informática y Sistemas de la FICH · UAGRM",
+} = Astro.props;
+
+const baseUrl = Astro.site ?? Astro.url;
+const canonical = new URL(Astro.url.pathname, baseUrl);
+const socialImage = new URL(image, baseUrl);
+const organizationUrl = new URL("/", baseUrl).toString();
+const logoUrl = new URL("/escudo-infosis.png", baseUrl).toString();
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "EducationalOrganization",
+      "@id": `${organizationUrl}#organization`,
+      name: "Dirección de Carrera de Informática y Sistemas",
+      alternateName: ["FICH", "UAGRM"],
+      url: organizationUrl,
+      logo: logoUrl,
+      email: "c_informatica.fich@uagrm.edu.bo",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Av. Humberto Suárez Roca",
+        addressLocality: "Camiri",
+        addressCountry: "BO",
+      },
+      parentOrganization: {
+        "@type": "CollegeOrUniversity",
+        name: "Universidad Autónoma Gabriel René Moreno",
+        alternateName: "UAGRM",
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${organizationUrl}#website`,
+      url: organizationUrl,
+      name: "Informática y Sistemas · FICH · UAGRM",
+      publisher: { "@id": `${organizationUrl}#organization` },
+      inLanguage: "es-BO",
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth scroll-pt-24 motion-reduce:scroll-auto">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#091724" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_BO" />
+    <meta
+      property="og:site_name"
+      content="Informática y Sistemas · FICH · UAGRM"
+    />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+    <link rel="icon" href="/escudo-infosis.png" type="image/png" />
+    <link rel="shortcut icon" href="/escudo-infosis.png" type="image/png" />
+    <title>{title}</title>
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(structuredData)}
+    />
+  </head>
+  <body
+    class="m-0 min-w-[320px] bg-paper font-sans text-ink antialiased [font-synthesis:none] [text-rendering:optimizeLegibility]"
+  >
+    <slot />
+  </body>
+</html>

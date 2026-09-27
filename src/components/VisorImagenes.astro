@@ -1,0 +1,136 @@
+---
+interface Imagen {
+  src: string;
+  alt: string;
+  titulo: string;
+}
+
+interface Props {
+  imagenes: Imagen[];
+  grupo: string;
+}
+
+const { imagenes, grupo } = Astro.props;
+---
+
+<dialog
+  class="visor-eventos fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none overflow-hidden border-0 bg-transparent p-0 text-ice"
+  aria-label="Galería de imágenes"
+  data-visor-dialog={grupo}
+>
+  <div
+    class="relative flex h-full w-full flex-col items-center justify-center gap-4 p-6 max-[600px]:gap-3 max-[600px]:p-4"
+  >
+    <button
+      class="absolute top-5 right-5 z-10 grid size-11 cursor-pointer place-items-center rounded-full border border-sky/30 bg-brand-deep/75 text-2xl text-ice transition-colors hover:bg-brand-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky max-[600px]:top-3 max-[600px]:right-3"
+      type="button"
+      aria-label="Cerrar visor"
+      data-visor-cerrar
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+    <p
+      class="m-0 rounded-full border border-sky/25 bg-brand-deep/80 px-4 py-2 text-sm font-semibold text-ice"
+      data-visor-contador
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      1 / {imagenes.length}
+    </p>
+    <figure class="m-0 flex min-h-0 max-w-full flex-col items-center gap-3">
+      <img
+        class="max-h-[calc(100dvh-9rem)] max-w-[calc(100vw-8rem)] object-contain max-[600px]:max-h-[calc(100dvh-8rem)] max-[600px]:max-w-[calc(100vw-3rem)]"
+        src={imagenes[0].src}
+        alt={imagenes[0].alt}
+        data-visor-imagen
+      />
+      <figcaption
+        class="text-center text-sm font-semibold text-ice/90"
+        data-visor-titulo
+      >
+        {imagenes[0].titulo}
+      </figcaption>
+    </figure>
+    <button
+      class="absolute top-1/2 left-4 z-10 grid size-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full border border-sky/30 bg-brand-deep/75 text-3xl text-ice transition-colors hover:bg-brand-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky max-[600px]:left-2"
+      type="button"
+      aria-label="Imagen anterior"
+      data-visor-anterior><span aria-hidden="true">‹</span></button
+    >
+    <button
+      class="absolute top-1/2 right-4 z-10 grid size-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full border border-sky/30 bg-brand-deep/75 text-3xl text-ice transition-colors hover:bg-brand-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky max-[600px]:right-2"
+      type="button"
+      aria-label="Imagen siguiente"
+      data-visor-siguiente><span aria-hidden="true">›</span></button
+    >
+  </div>
+</dialog>
+
+<script>
+  document
+    .querySelectorAll<HTMLDialogElement>("[data-visor-dialog]")
+    .forEach((dialogo) => {
+      const grupo = dialogo.dataset.visorDialog;
+      const activadores = Array.from(
+        document.querySelectorAll<HTMLButtonElement>("[data-visor-index]"),
+      ).filter((activador) => activador.dataset.visorGrupo === grupo);
+      const origenes = Array.from(
+        document.querySelectorAll<HTMLButtonElement>(
+          "[data-visor-imagen-origen]",
+        ),
+      ).filter((origen) => origen.dataset.visorGrupo === grupo);
+      const imagenes = origenes.map((origen) => ({
+        src: origen.dataset.imageSrc ?? "",
+        alt: origen.dataset.imageAlt ?? "",
+        titulo: origen.dataset.imageTitle ?? "",
+      }));
+      const imagen = dialogo.querySelector<HTMLImageElement>(
+        "[data-visor-imagen]",
+      );
+      const titulo = dialogo.querySelector<HTMLElement>("[data-visor-titulo]");
+      const contador = dialogo.querySelector<HTMLElement>(
+        "[data-visor-contador]",
+      );
+      let activo = 0;
+      let origen: HTMLButtonElement | null = null;
+      const actualizar = (indice: number) => {
+        activo = (indice + imagenes.length) % imagenes.length;
+        imagen!.src = imagenes[activo].src;
+        imagen!.alt = imagenes[activo].alt;
+        titulo!.textContent = imagenes[activo].titulo;
+        contador!.textContent = `${activo + 1} / ${imagenes.length}`;
+      };
+      activadores.forEach((activador, indice) =>
+        activador.addEventListener("click", () => {
+          origen = activador;
+          actualizar(Number(activador.dataset.visorIndex ?? indice));
+          dialogo.showModal();
+          document.body.classList.add("overflow-hidden");
+          dialogo
+            .querySelector<HTMLButtonElement>("[data-visor-cerrar]")
+            ?.focus();
+        }),
+      );
+      dialogo
+        .querySelector("[data-visor-anterior]")
+        ?.addEventListener("click", () => actualizar(activo - 1));
+      dialogo
+        .querySelector("[data-visor-siguiente]")
+        ?.addEventListener("click", () => actualizar(activo + 1));
+      dialogo
+        .querySelector("[data-visor-cerrar]")
+        ?.addEventListener("click", () => dialogo.close());
+      dialogo.addEventListener("click", (evento) => {
+        if (evento.target === dialogo) dialogo.close();
+      });
+      dialogo.addEventListener("keydown", (evento) => {
+        if (evento.key === "ArrowLeft") actualizar(activo - 1);
+        if (evento.key === "ArrowRight") actualizar(activo + 1);
+      });
+      dialogo.addEventListener("close", () => {
+        document.body.classList.remove("overflow-hidden");
+        origen?.focus();
+        origen = null;
+      });
+    });
+</script>

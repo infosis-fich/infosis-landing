@@ -1,0 +1,78 @@
+---
+import { galeriaInstitucional } from "../../datos/galeria";
+import CarruselGaleria from "../CarruselGaleria.astro";
+import EncabezadoSeccion from "../EncabezadoSeccion.astro";
+import VisorImagenes from "../VisorImagenes.astro";
+
+const grupos = [
+  {
+    nombre: "Comunidad universitaria",
+    grupo: "Comunidad",
+  },
+  {
+    nombre: "Formación y capacitación",
+    grupo: "Capacitación",
+  },
+  {
+    nombre: "Laboratorio de cómputo",
+    grupo: "Cómputo",
+  },
+  {
+    nombre: "Hardware y redes",
+    grupo: "Hardware y redes",
+  },
+] as const;
+const secciones = grupos.map((grupo) => ({
+  ...grupo,
+  imagenes: galeriaInstitucional.filter(
+    (imagen) => imagen.grupo === grupo.grupo,
+  ),
+}));
+let indiceInicial = 0;
+const seccionesConIndice = secciones.map((seccion) => {
+  const resultado = { ...seccion, indiceInicial };
+  indiceInicial += seccion.imagenes.length;
+  return resultado;
+});
+---
+
+<section
+  class="border-y border-line bg-tint py-[clamp(3.5rem,5vw,4.5rem)]"
+  id="galeria"
+  aria-labelledby="galeria-titulo"
+>
+  <div class="contenedor-pagina">
+    <EncabezadoSeccion
+      eyebrow="Nuestra comunidad"
+      titulo="Aprendemos haciendo."
+      descripcion="Una mirada a las actividades, laboratorios y espacios que forman parte de la experiencia en Informática y Sistemas."
+      id="galeria-titulo"
+    />
+    <div class="grid grid-cols-2 gap-8 max-[720px]:grid-cols-1">
+      {
+        seccionesConIndice.map(
+          ({ nombre, imagenes, indiceInicial: inicio }) => (
+            <div>
+              <h3 class="mb-4 font-display text-lg font-bold text-ink">
+                {nombre}
+              </h3>
+              <CarruselGaleria
+                imagenes={imagenes}
+                indiceInicial={inicio}
+                etiqueta={nombre}
+              />
+            </div>
+          ),
+        )
+      }
+    </div>
+    <VisorImagenes
+      grupo="galeria"
+      imagenes={galeriaInstitucional.map((imagen) => ({
+        src: imagen.src,
+        alt: imagen.alt,
+        titulo: imagen.nombre,
+      }))}
+    />
+  </div>
+</section>

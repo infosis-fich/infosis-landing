@@ -1,0 +1,85 @@
+---
+import type { Centro } from "../datos/centros";
+import IconoWhatsApp from "./IconoWhatsApp.astro";
+
+interface Props {
+  centro: Centro;
+}
+
+const { centro } = Astro.props;
+---
+
+<article
+  class="forma-acento group relative flex h-full flex-col overflow-hidden border border-line bg-tint transition-[box-shadow,transform] duration-300 hover:-translate-y-1 hover:shadow-lg motion-reduce:transition-none"
+>
+  <div
+    class="absolute inset-x-0 top-0 z-10 h-1 bg-brand transition-colors group-hover:bg-sky"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="relative h-44 overflow-hidden bg-tint">
+    <img
+      class="h-full w-full object-cover"
+      src={centro.imagen}
+      alt={centro.textoAlternativoImagen}
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+  <div class="flex h-full flex-col p-5 md:p-6">
+    <img
+      class="mb-3 h-12 w-full object-contain object-left"
+      src={centro.logo}
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+      decoding="async"
+    />
+    <h3 class="mb-2 font-display text-xl font-semibold leading-snug">
+      {centro.nombre}
+      {centro.sigla && <span class="text-sky"> ({centro.sigla})</span>}
+    </h3>
+    <p class="mb-4 text-sm leading-6 text-muted">{centro.resumen}</p>
+    <h4
+      class="mt-auto mb-2 text-xs font-semibold tracking-wider text-ink uppercase"
+    >
+      Contactar responsables
+    </h4>
+    <ul class="grid gap-2 border-t border-line pt-3">
+      {
+        centro.responsables.map((responsable) => (
+          <li class="flex items-center justify-between gap-3 text-sm">
+            <span class="flex min-w-0 items-center gap-2 font-semibold leading-5">
+              <span
+                class="grid size-7 shrink-0 place-items-center rounded-full bg-tint text-sky"
+                aria-hidden="true"
+              >
+                <svg
+                  class="size-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <circle cx="12" cy="8" r="3.5" />
+                  <path d="M5 20a7 7 0 0 1 14 0" />
+                </svg>
+              </span>
+              {responsable.nombre}
+            </span>
+            <a
+              class="grid size-9 shrink-0 place-items-center rounded-full border border-sky/30 bg-sky/10 text-sky transition-colors hover:bg-brand hover:text-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+              href={`https://wa.me/591${responsable.telefono}`}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Escribir por WhatsApp a ${responsable.nombre} al +591 ${responsable.telefono}`}
+              title={`Escribir por WhatsApp a ${responsable.nombre}`}
+            >
+              <IconoWhatsApp />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</article>

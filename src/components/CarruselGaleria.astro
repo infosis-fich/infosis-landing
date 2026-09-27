@@ -1,0 +1,93 @@
+---
+interface Imagen {
+  src: string;
+  alt: string;
+  nombre: string;
+}
+
+interface Props {
+  imagenes: Imagen[];
+  indiceInicial: number;
+  etiqueta: string;
+}
+
+const { imagenes, indiceInicial, etiqueta } = Astro.props;
+---
+
+<div class="relative" data-galeria-carrusel>
+  <div class="forma-acento overflow-hidden border border-line bg-paper">
+    <div
+      class="flex transition-transform duration-500 motion-reduce:transition-none"
+      data-galeria-pista
+    >
+      {
+        imagenes.map((imagen, indice) => (
+          <button
+            class="forma-acento group relative min-w-full aspect-[16/9] cursor-zoom-in overflow-hidden bg-brand-deep text-left focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-sky"
+            type="button"
+            data-visor-index={indiceInicial + indice}
+            data-visor-grupo="galeria"
+            data-visor-imagen-origen
+            data-image-src={imagen.src}
+            data-image-alt={imagen.alt}
+            data-image-title={imagen.nombre}
+            aria-label={`Ampliar imagen ${imagen.nombre} de ${etiqueta}`}
+          >
+            <img
+              class="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105 motion-reduce:transition-none"
+              src={imagen.src}
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+            <span class="absolute inset-x-0 bottom-0 bg-brand-deep/85 px-4 py-3 text-sm font-semibold text-ice">
+              {imagen.nombre}
+            </span>
+          </button>
+        ))
+      }
+    </div>
+  </div>
+  {
+    imagenes.length > 1 && (
+      <>
+        <button
+          class="absolute top-1/2 left-3 z-10 grid size-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full border border-sky/30 bg-brand-deep/85 text-3xl text-ice shadow-lg transition-colors hover:bg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky"
+          type="button"
+          data-galeria-anterior
+          aria-label={`Imagen anterior de ${etiqueta}`}
+        >
+          <span aria-hidden="true">‹</span>
+        </button>
+        <button
+          class="absolute top-1/2 right-3 z-10 grid size-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full border border-sky/30 bg-brand-deep/85 text-3xl text-ice shadow-lg transition-colors hover:bg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky"
+          type="button"
+          data-galeria-siguiente
+          aria-label={`Imagen siguiente de ${etiqueta}`}
+        >
+          <span aria-hidden="true">›</span>
+        </button>
+      </>
+    )
+  }
+</div>
+
+<script>
+  document
+    .querySelectorAll<HTMLElement>("[data-galeria-carrusel]")
+    .forEach((carrusel) => {
+      const pista = carrusel.querySelector<HTMLElement>("[data-galeria-pista]");
+      const imagenes = pista?.children.length ?? 0;
+      let activa = 0;
+      const actualizar = (indice: number) => {
+        activa = (indice + imagenes) % imagenes;
+        if (pista) pista.style.transform = `translateX(-${activa * 100}%)`;
+      };
+      carrusel
+        .querySelector("[data-galeria-anterior]")
+        ?.addEventListener("click", () => actualizar(activa - 1));
+      carrusel
+        .querySelector("[data-galeria-siguiente]")
+        ?.addEventListener("click", () => actualizar(activa + 1));
+    });
+</script>

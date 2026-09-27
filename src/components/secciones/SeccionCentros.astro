@@ -1,0 +1,25 @@
+---
+import { centros } from "../../datos/centros";
+import EncabezadoSeccion from "../EncabezadoSeccion.astro";
+import TarjetaCentro from "../TarjetaCentro.astro";
+---
+
+<section
+  class="border-y border-line bg-paper py-[clamp(3.5rem,5vw,4.5rem)]"
+  id="centros"
+  aria-labelledby="centros-titulo"
+>
+  <div class="contenedor-pagina">
+    <EncabezadoSeccion
+      eyebrow="Comunidad e infraestructura"
+      titulo="Tres centros conectan práctica, servicio e investigación."
+      descripcion="Cada centro impulsa actividades que complementan la formación de las carreras de Ingeniería Informática e Ingeniería en Sistemas."
+      id="centros-titulo"
+    />
+    <div
+      class="grid auto-rows-fr grid-cols-3 gap-5 max-[900px]:grid-cols-2 max-[720px]:grid-cols-1"
+    >
+      {centros.map((centro) => <TarjetaCentro centro={centro} />)}
+    </div>
+  </div>
+</section>

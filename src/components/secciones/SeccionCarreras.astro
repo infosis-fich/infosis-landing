@@ -1,0 +1,49 @@
+---
+import { carreras } from "../../datos/carreras";
+import EncabezadoSeccion from "../EncabezadoSeccion.astro";
+---
+
+<section
+  class="relative overflow-hidden border-y border-line bg-tint pt-[clamp(2rem,4vw,3.5rem)] pb-[clamp(3.5rem,5vw,4.5rem)]"
+  id="carreras"
+  aria-labelledby="carreras-titulo"
+>
+  <div class="contenedor-pagina relative z-10">
+    <EncabezadoSeccion
+      eyebrow="Oferta académica"
+      titulo="Dos carreras, distintos caminos para crear soluciones."
+      descripcion="La oferta académica comprende dos programas de grado de la FICH: Ingeniería Informática e Ingeniería en Sistemas, cada uno con su propio plan de estudios."
+      id="carreras-titulo"
+    />
+    <div class="grid grid-cols-2 gap-5 max-[720px]:grid-cols-1">
+      {
+        carreras.map((carrera) => (
+          <article class="forma-acento group relative flex h-full flex-col overflow-hidden bg-paper p-7 transition-[box-shadow,transform] duration-300 hover:-translate-y-1 hover:shadow-lg motion-reduce:transition-none md:p-9">
+            <div
+              class="absolute inset-x-0 top-0 h-1 bg-brand transition-colors group-hover:bg-sky"
+              aria-hidden="true"
+            />
+            <h3 class="mb-3 font-display text-xl font-semibold leading-snug">
+              {carrera.nombre}
+            </h3>
+            <p class="mb-5 max-w-[38rem] text-sm leading-6 text-muted">
+              {carrera.resumen}
+            </p>
+            <a
+              class="mt-auto flex items-center justify-between gap-4 border-t border-line pt-4 font-semibold text-sky transition-colors group-hover:text-ink"
+              href={carrera.ruta}
+            >
+              Ver la carrera{" "}
+              <span
+                aria-hidden="true"
+                class="text-xl transition-transform group-hover:translate-x-1"
+              >
+                →
+              </span>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

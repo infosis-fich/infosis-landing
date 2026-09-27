@@ -1,0 +1,36 @@
+---
+import { eventos } from "../../datos/eventos";
+import EncabezadoSeccion from "../EncabezadoSeccion.astro";
+import TarjetaEvento from "../TarjetaEvento.astro";
+import VisorImagenes from "../VisorImagenes.astro";
+---
+
+<section
+  class="border-y border-line bg-paper py-[clamp(3.5rem,5vw,4.5rem)]"
+  id="eventos"
+  aria-labelledby="eventos-titulo"
+>
+  <div class="contenedor-pagina">
+    <EncabezadoSeccion
+      eyebrow="Noticias y actividades"
+      titulo="Lo que hacemos y lo que viene."
+      descripcion="Eventos donde compartimos proyectos, aprendemos en comunidad y acercamos la tecnología a nuestro entorno."
+      id="eventos-titulo"
+    />
+    <div class="grid grid-cols-2 gap-5 max-[720px]:grid-cols-1">
+      {
+        eventos.map((evento, indice) => (
+          <TarjetaEvento evento={evento} indice={indice} />
+        ))
+      }
+    </div>
+    <VisorImagenes
+      grupo="eventos"
+      imagenes={eventos.map((evento) => ({
+        src: evento.imagen,
+        alt: evento.textoAlternativoImagen,
+        titulo: evento.nombre,
+      }))}
+    />
+  </div>
+</section>
