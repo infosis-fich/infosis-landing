@@ -419,7 +419,7 @@ const imagenesHero = [
       "[]",
   ) as OpcionTitulacion[];
 
-  const apiBase = import.meta.env.PUBLIC_EGRESADOS_API_URL?.replace(/\/$/, "");
+  const apiBase = import.meta.env.PUBLIC_INFOSIS_API_URL?.replace(/\/$/, "");
   const lookupForm =
     document.querySelector<HTMLFormElement>("#consulta-egresado");
   const registrationForm =
@@ -916,16 +916,6 @@ const imagenesHero = [
     addIfFilled(payload, "celularEmpresa", getFormValue("celularEmpresa"));
     addIfFilled(payload, "correoPersonal", getFormValue("correoPersonal"));
     addIfFilled(payload, "correoEmpresa", getFormValue("correoEmpresa"));
-    addIfFilled(
-      payload,
-      "aceptacion",
-      registrationForm.elements.namedItem("aceptacion") instanceof
-        HTMLInputElement &&
-        (registrationForm.elements.namedItem("aceptacion") as HTMLInputElement)
-          .checked
-        ? true
-        : undefined,
-    );
     const button = registrationForm.querySelector<HTMLButtonElement>(
       "button[type=submit]",
     );
