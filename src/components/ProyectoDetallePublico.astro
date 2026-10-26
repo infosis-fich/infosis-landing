@@ -20,7 +20,7 @@ const fechaTexto = (fecha: string | null) =>
 ---
 
 <section
-  class="seccion-institucional bg-tint"
+  class="seccion-institucional bg-surface-muted"
   aria-labelledby="detalle-proyecto-titulo"
 >
   <div class="contenedor-pagina">
@@ -35,7 +35,7 @@ const fechaTexto = (fecha: string | null) =>
 
     <div class="grid gap-6 lg:grid-cols-[minmax(14rem,18rem)_1fr] lg:gap-8">
       <figure
-        class="forma-acento mx-auto m-0 w-full max-w-[11rem] self-start overflow-hidden border border-line bg-brand-deep lg:mx-0 lg:max-w-none"
+        class="forma-acento mx-auto m-0 w-full max-w-[11rem] self-start overflow-hidden border border-border-subtle bg-brand-deep lg:mx-0 lg:max-w-none"
       >
         <a
           class="relative block cursor-pointer"
@@ -55,24 +55,28 @@ const fechaTexto = (fecha: string | null) =>
           >
         </a>
       </figure>
-      <div class="forma-acento border border-line bg-paper p-5 md:p-8">
+      <div
+        class="forma-acento border border-border-subtle bg-card-bg p-5 md:p-8"
+      >
         <header
-          class="mb-6 flex flex-wrap items-center justify-between gap-3 border-b border-line pb-5"
+          class="mb-6 flex flex-wrap items-center justify-between gap-3 border-b border-border-subtle pb-5"
         >
           <p class="m-0 text-xs font-bold tracking-[.14em] text-sky uppercase">
             {tipoTexto(proyecto.tipo)}
           </p>
-          <p class="m-0 text-sm text-muted">
-            <span class="font-semibold text-ink">Publicado:</span>
+          <p class="m-0 text-sm text-text-muted">
+            <span class="font-semibold text-text-primary">Publicado:</span>
             <time datetime={proyecto.fechaPublicacion ?? undefined}
               >{fechaTexto(proyecto.fechaPublicacion)}</time
             >
           </p>
         </header>
         <section aria-label="Información académica del proyecto">
-          <dl class="grid gap-x-8 gap-y-5 text-sm text-ink sm:grid-cols-2">
+          <dl
+            class="grid gap-x-8 gap-y-5 text-sm text-text-primary sm:grid-cols-2"
+          >
             <div class="sm:col-span-2">
-              <dt class="mb-1 font-semibold text-muted">Autores</dt>
+              <dt class="mb-1 font-semibold text-text-muted">Autores</dt>
               <dd class="leading-6">
                 {
                   proyecto.autores
@@ -84,7 +88,7 @@ const fechaTexto = (fecha: string | null) =>
               </dd>
             </div>
             <div>
-              <dt class="mb-1 font-semibold text-muted">Tutor</dt>
+              <dt class="mb-1 font-semibold text-text-muted">Tutor</dt>
               <dd class="leading-6">
                 {
                   nombreCompleto(
@@ -97,7 +101,7 @@ const fechaTexto = (fecha: string | null) =>
             {
               proyecto.materia && (
                 <div class="sm:col-span-2">
-                  <dt class="mb-1 font-semibold text-muted">Materia</dt>
+                  <dt class="mb-1 font-semibold text-text-muted">Materia</dt>
                   <dd class="leading-6">
                     {proyecto.materia.codigo} - {proyecto.materia.nombre}
                   </dd>
@@ -106,7 +110,7 @@ const fechaTexto = (fecha: string | null) =>
             }
           </dl>
         </section>
-        <div class="mt-7 border-t border-line pt-5">
+        <div class="mt-7 border-t border-border-subtle pt-5">
           <a
             class="boton-principal w-full cursor-pointer justify-center sm:w-auto"
             href={proyecto.pdfUrl}

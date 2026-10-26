@@ -21,7 +21,7 @@ const oscuro = tono === "oscuro";
   <h2
     class:list={[
       "mb-4 max-w-[1100px] font-heading text-[clamp(2rem,4vw,3.4rem)] font-semibold leading-[1.1] tracking-[-.025em]",
-      oscuro && "text-ice",
+      oscuro && "text-text-on-inverse",
     ]}
     id={id}
   >
@@ -32,7 +32,7 @@ const oscuro = tono === "oscuro";
       <p
         class:list={[
           "mb-0 max-w-[640px] text-base leading-7",
-          oscuro ? "text-ice/75" : "text-muted",
+          oscuro ? "text-text-on-inverse/75" : "text-text-muted",
         ]}
       >
         {descripcion}

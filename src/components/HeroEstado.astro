@@ -12,7 +12,7 @@ const { codigo, titulo, destacado, labelledby } = Astro.props;
 ---
 
 <section
-  class="hero-estado fondo-institucional relative flex items-center overflow-hidden border-b border-line text-ice"
+  class="hero-estado fondo-institucional relative flex items-center overflow-hidden border-b border-border-subtle text-text-on-inverse"
   aria-labelledby={labelledby}
 >
   <div
@@ -36,7 +36,7 @@ const { codigo, titulo, destacado, labelledby } = Astro.props;
     >
       <CircuitosDecorativos id={`resplandor-estado-${codigo}`} />
       <span
-        class="relative z-10 font-heading text-[clamp(5rem,14vw,10rem)] font-bold leading-none text-ice/90"
+        class="relative z-10 font-heading text-[clamp(5rem,14vw,10rem)] font-bold leading-none text-text-on-inverse/90"
         >{codigo}</span
       >
     </div>

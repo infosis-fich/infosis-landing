@@ -9,11 +9,11 @@ const esInicio = Astro.url.pathname === "/";
 ---
 
 <a
-  class="absolute -top-16 left-4 z-50 bg-ice px-4 py-3 text-brand-deep focus:top-4 focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-accent"
+  class="absolute -top-16 left-4 z-50 bg-text-on-inverse px-4 py-3 text-brand-deep focus:top-4 focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-accent"
   href={esInicio ? "#contenido" : "/#contenido"}>Saltar al contenido</a
 >
 <header
-  class="sticky top-0 z-[100] isolate border-b border-line/70 bg-paper/95 backdrop-blur-[14px]"
+  class="sticky top-0 z-[100] isolate border-b border-border-subtle/70 bg-card-bg/95 backdrop-blur-[14px]"
   data-site-header
 >
   <span
@@ -41,14 +41,14 @@ const esInicio = Astro.url.pathname === "/";
         <span class="min-w-0">
           <span class="block truncate">Informática y Sistemas</span>
           <small
-            class="mt-1 block font-sans text-[.68rem] font-medium tracking-[.06em] text-muted"
+            class="mt-1 block font-sans text-[.68rem] font-medium tracking-[.06em] text-text-muted"
           >
             FICH · UAGRM
           </small>
         </span>
       </a>
       <button
-        class="hidden size-11 shrink-0 items-center justify-center rounded-md border border-line bg-transparent text-ice transition-colors hover:border-sky hover:text-sky focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent aria-[expanded=true]:border-sky aria-[expanded=true]:bg-sky aria-[expanded=true]:text-brand-deep max-[820px]:inline-flex"
+        class="hidden size-11 shrink-0 items-center justify-center rounded-md border border-border-subtle bg-transparent text-text-on-inverse transition-colors hover:border-sky hover:text-sky focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-accent aria-[expanded=true]:border-sky aria-[expanded=true]:bg-sky aria-[expanded=true]:text-brand-deep max-[820px]:inline-flex"
         type="button"
         aria-controls="navegacion-principal"
         aria-expanded="false"
@@ -61,14 +61,14 @@ const esInicio = Astro.url.pathname === "/";
     </div>
     <nav
       id="navegacion-principal"
-      class="flex items-center gap-[clamp(.9rem,2vw,1.5rem)] text-sm font-medium text-ink max-[820px]:hidden max-[820px]:mt-2 max-[820px]:w-full max-[820px]:flex-col max-[820px]:items-stretch max-[820px]:gap-0 max-[820px]:mb-4 max-[820px]:text-[.9rem]"
+      class="flex items-center gap-[clamp(.9rem,2vw,1.5rem)] text-sm font-medium text-text-primary max-[820px]:hidden max-[820px]:mt-2 max-[820px]:w-full max-[820px]:flex-col max-[820px]:items-stretch max-[820px]:gap-0 max-[820px]:mb-4 max-[820px]:text-[.9rem]"
       aria-label="Navegación principal"
       data-mobile-menu
     >
       {
         enlaces.map(([href, texto]) => (
           <a
-            class="whitespace-nowrap py-2.5 transition-colors duration-200 hover:text-sky max-[820px]:border-b max-[820px]:border-line/50"
+            class="whitespace-nowrap py-2.5 transition-colors duration-200 hover:text-sky max-[820px]:border-b max-[820px]:border-border-subtle/50"
             href={esInicio ? href : `/${href}`}
           >
             {texto}
@@ -76,7 +76,7 @@ const esInicio = Astro.url.pathname === "/";
         ))
       }
       <a
-        class="whitespace-nowrap py-2.5 transition-colors duration-200 hover:text-sky max-[820px]:border-b max-[820px]:border-line/50"
+        class="whitespace-nowrap py-2.5 transition-colors duration-200 hover:text-sky max-[820px]:border-b max-[820px]:border-border-subtle/50"
         href="/egresados"
       >
         Egresados

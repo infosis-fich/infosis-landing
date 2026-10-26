@@ -25,7 +25,7 @@ const tieneVariasImagenes = imagenes.length > 1;
 
 <section
   class:list={[
-    "fondo-institucional relative flex min-h-[clamp(42rem,calc(100svh-72px),52rem)] items-center overflow-hidden border-b border-line text-ice max-[820px]:min-h-[clamp(32rem,calc(84svh-105px),44rem)]",
+    "fondo-institucional relative flex min-h-[clamp(42rem,calc(100svh-72px),52rem)] items-center overflow-hidden border-b border-border-subtle text-text-on-inverse max-[820px]:min-h-[clamp(32rem,calc(84svh-105px),44rem)]",
     className,
   ]}
   id={id}
@@ -61,7 +61,7 @@ const tieneVariasImagenes = imagenes.length > 1;
       <>
         <div class="pointer-events-none absolute inset-x-0 top-1/2 z-20 flex -translate-y-1/2 items-center justify-between px-[clamp(1rem,4vw,3rem)] max-[820px]:hidden">
           <button
-            class="pointer-events-auto grid size-10 cursor-pointer place-items-center rounded-full border border-sky/30 bg-brand-deep/65 text-ice backdrop-blur-sm transition-colors hover:bg-brand-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky"
+            class="pointer-events-auto grid size-10 cursor-pointer place-items-center rounded-full border border-sky/30 bg-brand-deep/65 text-text-on-inverse backdrop-blur-sm transition-colors hover:bg-brand-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky"
             type="button"
             data-carrusel-previous
             aria-label={`Mostrar ${etiquetaControl} anterior`}
@@ -78,7 +78,7 @@ const tieneVariasImagenes = imagenes.length > 1;
             </svg>
           </button>
           <button
-            class="pointer-events-auto grid size-10 cursor-pointer place-items-center rounded-full border border-sky/30 bg-brand-deep/65 text-ice backdrop-blur-sm transition-colors hover:bg-brand-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky"
+            class="pointer-events-auto grid size-10 cursor-pointer place-items-center rounded-full border border-sky/30 bg-brand-deep/65 text-text-on-inverse backdrop-blur-sm transition-colors hover:bg-brand-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky"
             type="button"
             data-carrusel-next
             aria-label={`Mostrar ${etiquetaControl} siguiente`}
@@ -102,7 +102,7 @@ const tieneVariasImagenes = imagenes.length > 1;
         >
           {imagenes.map((imagen, indice) => (
             <button
-              class="hero-indicador size-2.5 cursor-pointer rounded-full bg-ice/55 transition-[background-color,transform] hover:bg-ice"
+              class="hero-indicador size-2.5 cursor-pointer rounded-full bg-text-on-inverse/55 transition-[background-color,transform] hover:bg-text-on-inverse"
               type="button"
               data-carrusel-go-to={indice}
               aria-label={`Mostrar ${etiquetaControl}: ${imagen.nombre}`}

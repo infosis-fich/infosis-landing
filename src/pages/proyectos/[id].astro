@@ -91,11 +91,11 @@ const migas: Array<{ texto: string; href?: string }> = [
       <ProyectoDetallePublico proyecto={proyecto} />
     ) : (
       <section
-        class="seccion-institucional bg-tint"
+        class="seccion-institucional bg-surface-muted"
         aria-labelledby="detalle-proyecto-titulo"
       >
         <div class="contenedor-pagina">
-          <div class="mx-auto max-w-2xl border border-line bg-paper px-5 py-12 text-center md:px-8">
+          <div class="mx-auto max-w-2xl border border-border-subtle bg-card-bg px-5 py-12 text-center md:px-8">
             <h1
               class="m-0 mb-3 font-display text-2xl font-semibold leading-snug tracking-[-.01em] md:text-3xl"
               id="detalle-proyecto-titulo"
@@ -104,7 +104,7 @@ const migas: Array<{ texto: string; href?: string }> = [
                 ? "Proyecto no encontrado"
                 : "No pudimos cargar el proyecto"}
             </h1>
-            <p class="mx-auto mb-6 max-w-lg text-sm leading-6 text-muted">
+            <p class="mx-auto mb-6 max-w-lg text-sm leading-6 text-text-muted">
               {estado === "no-encontrado"
                 ? "El proyecto que buscas no existe o ya no está publicado."
                 : "El servicio de proyectos no respondió. Intenta nuevamente en unos minutos."}

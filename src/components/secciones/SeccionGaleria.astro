@@ -37,7 +37,7 @@ const seccionesConIndice = secciones.map((seccion) => {
 ---
 
 <section
-  class="seccion-institucional border-y border-line bg-tint"
+  class="seccion-institucional border-y border-border-subtle bg-surface-muted"
   id="galeria"
   aria-labelledby="galeria-titulo"
 >
@@ -55,7 +55,7 @@ const seccionesConIndice = secciones.map((seccion) => {
         seccionesConIndice.map(
           ({ nombre, imagenes, indiceInicial: inicio }) => (
             <div>
-              <h3 class="mb-4 font-display text-lg font-bold text-ink max-[720px]:mb-2 max-[720px]:text-base">
+              <h3 class="mb-4 font-display text-lg font-bold text-text-primary max-[720px]:mb-2 max-[720px]:text-base">
                 {nombre}
               </h3>
               <CarruselGaleria

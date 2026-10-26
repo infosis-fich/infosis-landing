@@ -12,7 +12,7 @@ const { carrera, semestres } = Astro.props;
 ---
 
 <section
-  class="bg-tint seccion-amplia"
+  class="bg-surface-muted seccion-amplia"
   id="plan-estudios"
   aria-labelledby="plan-titulo"
 >
@@ -36,26 +36,26 @@ const { carrera, semestres } = Astro.props;
         semestres.map((semestre, indice) => (
           <details
             class:list={[
-              "group border bg-paper",
-              indice < 2 ? "border-brand/40" : "border-line",
+              "group border bg-card-bg",
+              indice < 2 ? "border-brand/40" : "border-border-subtle",
             ]}
             open={indice < 2}
           >
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-semibold text-ink marker:hidden">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-semibold text-text-primary marker:hidden">
               <span>
                 {semestre.nombre}
-                <small class="ml-2 font-normal text-muted">
+                <small class="ml-2 font-normal text-text-muted">
                   {semestre.materias.length} materias
                 </small>
               </span>
               <span
-                class="grid size-8 shrink-0 place-items-center rounded-full border border-line text-lg text-sky transition-transform group-open:rotate-45"
+                class="grid size-8 shrink-0 place-items-center rounded-full border border-border-subtle text-lg text-sky transition-transform group-open:rotate-45"
                 aria-hidden="true"
               >
                 +
               </span>
             </summary>
-            <ul class="m-0 grid list-none gap-2 border-t border-line px-5 py-4 text-sm leading-6 text-muted">
+            <ul class="m-0 grid list-none gap-2 border-t border-border-subtle px-5 py-4 text-sm leading-6 text-text-muted">
               {semestre.materias.map((materia, materiaIndice) => (
                 <li class="flex items-start gap-3">
                   <span
