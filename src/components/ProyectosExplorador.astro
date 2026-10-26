@@ -355,6 +355,12 @@ const aniosProyecto = Array.from(
       status.textContent = mensaje;
       status.classList.toggle("hidden", !visible);
     };
+    const resumenPublicados = (cantidad: number) =>
+      cantidad === 0
+        ? "Aún no hay proyectos publicados."
+        : cantidad === 1
+          ? "Último proyecto publicado"
+          : `Últimos ${cantidad} proyectos publicados`;
     const skeletons = () => `
       ${[1, 2]
         .map(
@@ -496,9 +502,7 @@ const aniosProyecto = Array.from(
           : resultado.elementos;
         if (summary) {
           summary.textContent = preview
-            ? proyectos.length
-              ? "Últimos 2 proyectos publicados"
-              : "Aún no hay proyectos publicados."
+            ? resumenPublicados(proyectos.length)
             : resultado.total === 0
               ? hayFiltros
                 ? "No encontramos proyectos con estos criterios."
