@@ -1,0 +1,45 @@
+---
+import PaginaInstitucional from "../../components/PaginaInstitucional.astro";
+import ProyectoDetallePublico from "../../components/ProyectoDetallePublico.astro";
+import SubencabezadoPagina from "../../components/SubencabezadoPagina.astro";
+import { listarProyectos } from "../../lib/proyectos-api";
+
+export async function getStaticPaths() {
+  try {
+    const primeraPagina = await listarProyectos({
+      pagina: 1,
+      tamanoPagina: 100,
+    });
+    const paginasRestantes = await Promise.all(
+      Array.from(
+        { length: Math.max(0, primeraPagina.totalPaginas - 1) },
+        (_, indice) =>
+          listarProyectos({ pagina: indice + 2, tamanoPagina: 100 }),
+      ),
+    );
+    const proyectos = [primeraPagina, ...paginasRestantes].flatMap(
+      (lista) => lista.elementos,
+    );
+    return proyectos.map((proyecto) => ({ params: { id: proyecto.id } }));
+  } catch {
+    return [];
+  }
+}
+
+const { id } = Astro.params;
+---
+
+<PaginaInstitucional
+  title="Detalle de proyecto · Informática y Sistemas · FICH · UAGRM"
+  description="Consulta la información académica y el documento de un proyecto de Informática y Sistemas."
+  imageAlt="Detalle de proyecto académico de Informática y Sistemas"
+>
+  <SubencabezadoPagina
+    migas={[
+      { texto: "Inicio", href: "/" },
+      { texto: "Repositorio de proyectos", href: "/proyectos" },
+      { texto: "Detalle del proyecto" },
+    ]}
+  />
+  <ProyectoDetallePublico id={id ?? ""} />
+</PaginaInstitucional>

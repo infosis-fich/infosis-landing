@@ -226,6 +226,10 @@ button:disabled {
   padding-block: clamp(3.5rem, 5vw, 4.5rem);
 }
 
+@utility seccion-resumen {
+  padding-block: clamp(2.5rem, 3.5vw, 3.5rem);
+}
+
 @utility seccion-amplia {
   padding-block: clamp(4rem, 8vw, 7rem);
 }

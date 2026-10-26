@@ -1,0 +1,142 @@
+---
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<section
+  class="seccion-institucional bg-tint"
+  data-public-project-detail
+  data-project-id={id}
+  aria-labelledby="detalle-proyecto-titulo"
+>
+  <div class="contenedor-pagina">
+    <div class="mb-6 max-w-4xl md:mb-8">
+      <h1
+        class="m-0 max-w-4xl font-display text-2xl font-semibold leading-snug tracking-[-.01em] md:text-3xl"
+        id="detalle-proyecto-titulo"
+      >
+        Cargando proyecto…
+      </h1>
+    </div>
+
+    <div data-public-project-content aria-busy="true">
+      <div
+        class="grid gap-6 lg:grid-cols-[minmax(14rem,18rem)_1fr] lg:gap-8"
+        aria-hidden="true"
+      >
+        <div
+          class="mx-auto aspect-[.707/1] w-full max-w-[11rem] animate-pulse bg-tint lg:mx-0 lg:max-w-none"
+        >
+        </div>
+        <div class="border border-line bg-paper p-5 md:p-8">
+          <div class="mb-6 h-4 w-36 animate-pulse bg-tint"></div>
+          <div class="grid gap-4 border-t border-line pt-5">
+            <div class="h-4 w-full animate-pulse bg-tint"></div>
+            <div class="h-4 w-3/4 animate-pulse bg-tint"></div>
+            <div class="h-4 w-1/2 animate-pulse bg-tint"></div>
+          </div>
+          <div class="mt-7 border-t border-line pt-5">
+            <div class="h-11 w-full animate-pulse bg-tint sm:w-48"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p
+      class="mt-5 hidden border border-accent/40 bg-accent/10 px-4 py-3 text-sm leading-6 text-ink"
+      data-public-project-error
+      role="alert"
+    >
+    </p>
+  </div>
+</section>
+
+<script>
+  import { consultarProyecto } from "../lib/proyectos-api";
+  import type { Proyecto } from "../tipos/proyectos";
+
+  const root = document.querySelector<HTMLElement>(
+    "[data-public-project-detail]",
+  );
+  if (root) {
+    const id = root.dataset.projectId;
+    const content = root.querySelector<HTMLElement>(
+      "[data-public-project-content]",
+    );
+    const title = root.querySelector<HTMLElement>("#detalle-proyecto-titulo");
+    const error = root.querySelector<HTMLElement>(
+      "[data-public-project-error]",
+    );
+    const escapar = (texto: string) =>
+      texto.replace(
+        /[&<>'"]/g,
+        (caracter) =>
+          ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            "'": "&#39;",
+            '"': "&quot;",
+          })[caracter] ?? caracter,
+      );
+    const nombreCompleto = (nombres: string, apellidos: string) =>
+      `${nombres} ${apellidos}`.trim();
+    const tipoTexto = (tipo: Proyecto["tipo"]) =>
+      tipo === "ACA" ? "Proyecto académico" : "Proyecto de grado";
+    const fechaTexto = (fecha: string | null) =>
+      fecha
+        ? new Intl.DateTimeFormat("es-BO", { dateStyle: "medium" }).format(
+            new Date(fecha),
+          )
+        : "Fecha no disponible";
+
+    const renderizar = (proyecto: Proyecto) => {
+      if (title) title.textContent = proyecto.titulo;
+      if (!content) return;
+      content.innerHTML = `
+        <div class="grid gap-6 lg:grid-cols-[minmax(14rem,18rem)_1fr] lg:gap-8">
+          <figure class="forma-acento mx-auto m-0 w-full max-w-[11rem] self-start overflow-hidden border border-line bg-brand-deep lg:mx-0 lg:max-w-none">
+            <a class="relative block cursor-pointer" href="${escapar(proyecto.pdfUrl)}" target="_blank" rel="noreferrer" aria-label="Visualizar proyecto en PDF: ${escapar(proyecto.titulo)}">
+              <img class="block aspect-[.707/1] h-auto w-full object-cover" src="${escapar(proyecto.miniaturaUrl)}" alt="Portada del proyecto ${escapar(proyecto.titulo)}" />
+              <span class="pointer-events-none absolute right-2 bottom-2 bg-sky px-1.5 py-0.5 text-[.6rem] font-bold tracking-[.1em] text-brand-deep uppercase" aria-hidden="true">PDF</span>
+            </a>
+          </figure>
+          <div class="forma-acento border border-line bg-paper p-5 md:p-8">
+            <header class="mb-6 flex flex-wrap items-center justify-between gap-3 border-b border-line pb-5">
+              <p class="m-0 text-xs font-bold tracking-[.14em] text-sky uppercase">${tipoTexto(proyecto.tipo)}</p>
+              <p class="m-0 text-sm text-muted"><span class="font-semibold text-ink">Publicado:</span> <time datetime="${proyecto.fechaPublicacion ? escapar(proyecto.fechaPublicacion) : ""}">${escapar(fechaTexto(proyecto.fechaPublicacion))}</time></p>
+            </header>
+            <section aria-label="Información académica del proyecto">
+              <dl class="grid gap-x-8 gap-y-5 text-sm text-ink sm:grid-cols-2">
+                <div class="sm:col-span-2"><dt class="mb-1 font-semibold text-muted">Autores</dt><dd class="leading-6">${escapar(proyecto.autores.map((autor) => nombreCompleto(autor.nombres, autor.apellidos)).join(", "))}</dd></div>
+                <div><dt class="mb-1 font-semibold text-muted">Tutor</dt><dd class="leading-6">${escapar(nombreCompleto(proyecto.tutor.nombres, proyecto.tutor.apellidos))}</dd></div>
+                ${proyecto.materia ? `<div class="sm:col-span-2"><dt class="mb-1 font-semibold text-muted">Materia</dt><dd class="leading-6">${escapar(proyecto.materia.codigo)} - ${escapar(proyecto.materia.nombre)}</dd></div>` : ""}
+              </dl>
+            </section>
+            <div class="mt-7 border-t border-line pt-5">
+              <a class="boton-principal w-full cursor-pointer justify-center sm:w-auto" href="${escapar(proyecto.pdfUrl)}" target="_blank" rel="noreferrer">Visualizar proyecto en PDF <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </div>`;
+      content.setAttribute("aria-busy", "false");
+    };
+
+    if (id) {
+      consultarProyecto(id)
+        .then(renderizar)
+        .catch((consultaError: unknown) => {
+          if (content) content.innerHTML = "";
+          if (error) {
+            error.textContent =
+              consultaError instanceof Error
+                ? consultaError.message
+                : "No pudimos cargar este proyecto.";
+            error.classList.remove("hidden");
+          }
+          content?.setAttribute("aria-busy", "false");
+        });
+    }
+  }
+</script>

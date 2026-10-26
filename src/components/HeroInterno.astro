@@ -1,7 +1,7 @@
 ---
 import CarruselHero from "./CarruselHero.astro";
-import MigasNavegacion from "./MigasNavegacion.astro";
 import PanelDetalle from "./PanelDetalle.astro";
+import SubencabezadoPagina from "./SubencabezadoPagina.astro";
 
 interface ImagenHero {
   src: string;
@@ -39,11 +39,7 @@ const {
 } = Astro.props;
 ---
 
-<section class="border-b border-line bg-paper py-5">
-  <div class="contenedor-pagina">
-    <MigasNavegacion items={migas} />
-  </div>
-</section>
+<SubencabezadoPagina migas={migas} />
 
 <CarruselHero imagenes={imagenes} labelledby={labelledby}>
   <div

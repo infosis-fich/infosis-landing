@@ -1,0 +1,19 @@
+---
+import PaginaInstitucional from "../components/PaginaInstitucional.astro";
+import ProyectosExplorador from "../components/ProyectosExplorador.astro";
+import SubencabezadoPagina from "../components/SubencabezadoPagina.astro";
+---
+
+<PaginaInstitucional
+  title="Proyectos académicos y de grado · Informática y Sistemas · FICH · UAGRM"
+  description="Explora los proyectos académicos y de grado desarrollados por estudiantes de Informática y Sistemas de la FICH · UAGRM."
+  imageAlt="Proyectos académicos y de grado de Informática y Sistemas"
+>
+  <SubencabezadoPagina
+    migas={[
+      { texto: "Inicio", href: "/" },
+      { texto: "Repositorio de proyectos" },
+    ]}
+  />
+  <ProyectosExplorador />
+</PaginaInstitucional>
