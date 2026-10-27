@@ -24,6 +24,7 @@ export interface Proyecto {
   id: string;
   titulo: string;
   tipo: TipoProyecto;
+  anioProyecto: number;
   materiaId: string | null;
   tutorId: string;
   fechaPublicacion: string | null;
