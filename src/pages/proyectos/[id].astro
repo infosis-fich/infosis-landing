@@ -1,0 +1,125 @@
+---
+import PaginaInstitucional from "../../components/PaginaInstitucional.astro";
+import ProyectoDetallePublico from "../../components/ProyectoDetallePublico.astro";
+import SubencabezadoPagina from "../../components/SubencabezadoPagina.astro";
+import { ApiError } from "../../lib/api";
+import { consultarProyecto } from "../../lib/proyectos-api";
+import type { Proyecto } from "../../tipos/proyectos";
+
+export const prerender = false;
+
+const { id } = Astro.params;
+
+let proyecto: Proyecto | null = null;
+let estado: "encontrado" | "no-encontrado" | "error" = "no-encontrado";
+
+if (id) {
+  try {
+    proyecto = await consultarProyecto(id);
+    estado = "encontrado";
+  } catch (error) {
+    if (error instanceof ApiError && error.status === 404) {
+      estado = "no-encontrado";
+    } else {
+      estado = "error";
+      console.error(
+        `[proyectos] No se pudo consultar el proyecto ${id}.`,
+        error,
+      );
+    }
+  }
+}
+
+if (estado === "no-encontrado") {
+  Astro.response.status = 404;
+  Astro.response.statusText = "Not Found";
+  Astro.response.headers.set("Cache-Control", "no-store");
+} else if (estado === "error") {
+  Astro.response.status = 503;
+  Astro.response.statusText = "Service Unavailable";
+  Astro.response.headers.set("Cache-Control", "no-store");
+} else {
+  Astro.response.headers.set(
+    "Cache-Control",
+    "public, max-age=60, stale-while-revalidate=300",
+  );
+}
+
+const nombreCompleto = (nombres: string, apellidos: string) =>
+  `${nombres} ${apellidos}`.trim();
+const tipoTexto = (tipo: Proyecto["tipo"]) =>
+  tipo === "ACA" ? "Proyecto académico" : "Proyecto de grado";
+
+const autores = proyecto
+  ? proyecto.autores
+      .map((autor) => nombreCompleto(autor.nombres, autor.apellidos))
+      .join(", ")
+  : "";
+const materia = proyecto?.materia
+  ? `${proyecto.materia.codigo} - ${proyecto.materia.nombre}. `
+  : "";
+
+const titulo = proyecto
+  ? `${proyecto.titulo} · Proyectos · FICH · UAGRM`
+  : estado === "no-encontrado"
+    ? "Proyecto no encontrado · Proyectos · FICH · UAGRM"
+    : "No pudimos cargar el proyecto · Proyectos · FICH · UAGRM";
+
+const descripcion = proyecto
+  ? `${tipoTexto(proyecto.tipo)}${autores ? ` de ${autores}` : ""}. ${materia}Consulta la ficha y el documento en el repositorio de proyectos de Informática y Sistemas.`
+  : estado === "no-encontrado"
+    ? "El proyecto que buscas no existe o ya no está publicado en el repositorio de Informática y Sistemas."
+    : "No pudimos consultar el proyecto en este momento. Intenta nuevamente en unos minutos.";
+
+const migas: Array<{ texto: string; href?: string }> = [
+  { texto: "Inicio", href: "/" },
+  { texto: "Repositorio de proyectos", href: "/proyectos" },
+  { texto: "Detalle del proyecto" },
+];
+---
+
+<PaginaInstitucional
+  title={titulo}
+  description={descripcion}
+  image={proyecto?.miniaturaUrl}
+  imageAlt={proyecto ? `Portada del proyecto ${proyecto.titulo}` : undefined}
+  robots={proyecto ? "index, follow" : "noindex, follow"}
+>
+  <SubencabezadoPagina migas={migas} />
+  {
+    proyecto ? (
+      <ProyectoDetallePublico proyecto={proyecto} />
+    ) : (
+      <section
+        class="seccion-institucional bg-surface-muted"
+        aria-labelledby="detalle-proyecto-titulo"
+      >
+        <div class="contenedor-pagina">
+          <div class="mx-auto max-w-2xl border border-border-subtle bg-card-bg px-5 py-12 text-center md:px-8">
+            <h1
+              class="m-0 mb-3 font-display text-2xl font-semibold leading-snug tracking-[-.01em] md:text-3xl"
+              id="detalle-proyecto-titulo"
+            >
+              {estado === "no-encontrado"
+                ? "Proyecto no encontrado"
+                : "No pudimos cargar el proyecto"}
+            </h1>
+            <p class="mx-auto mb-6 max-w-lg text-sm leading-6 text-text-muted">
+              {estado === "no-encontrado"
+                ? "El proyecto que buscas no existe o ya no está publicado."
+                : "El servicio de proyectos no respondió. Intenta nuevamente en unos minutos."}
+            </p>
+            <div class="flex flex-wrap justify-center gap-3">
+              <a class="boton-principal cursor-pointer" href="/proyectos">
+                Volver al repositorio <span aria-hidden="true">→</span>
+              </a>
+              <a class="boton-secundario cursor-pointer" href="/">
+                Ir al inicio
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+</PaginaInstitucional>

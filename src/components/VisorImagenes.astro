@@ -14,7 +14,7 @@ const { imagenes, grupo } = Astro.props;
 ---
 
 <dialog
-  class="visor-imagenes fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none overflow-hidden border-0 bg-transparent p-0 text-ice"
+  class="visor-imagenes fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none overflow-hidden border-0 bg-transparent p-0 text-text-on-inverse"
   aria-label="Galería de imágenes"
   data-visor-dialog={grupo}
 >
@@ -22,7 +22,7 @@ const { imagenes, grupo } = Astro.props;
     class="relative flex h-full w-full flex-col items-center justify-center gap-4 p-6 max-[600px]:gap-3 max-[600px]:p-4"
   >
     <button
-      class="absolute top-5 right-5 z-10 grid size-11 cursor-pointer place-items-center rounded-full border border-sky/30 bg-brand-deep/75 text-2xl text-ice transition-colors hover:bg-brand-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky max-[600px]:top-3 max-[600px]:right-3"
+      class="absolute top-5 right-5 z-10 grid size-11 cursor-pointer place-items-center rounded-full border border-sky/30 bg-brand-deep/75 text-2xl text-text-on-inverse transition-colors hover:bg-brand-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky max-[600px]:top-3 max-[600px]:right-3"
       type="button"
       aria-label="Cerrar visor"
       data-visor-cerrar
@@ -30,7 +30,7 @@ const { imagenes, grupo } = Astro.props;
       <span aria-hidden="true">×</span>
     </button>
     <p
-      class="m-0 rounded-full border border-sky/25 bg-brand-deep/80 px-4 py-2 text-sm font-semibold text-ice"
+      class="m-0 rounded-full border border-sky/25 bg-brand-deep/80 px-4 py-2 text-sm font-semibold text-text-on-inverse"
       data-visor-contador
       aria-live="polite"
       aria-atomic="true"
@@ -45,20 +45,20 @@ const { imagenes, grupo } = Astro.props;
         data-visor-imagen
       />
       <figcaption
-        class="text-center text-sm font-semibold text-ice/90"
+        class="text-center text-sm font-semibold text-text-on-inverse/90"
         data-visor-titulo
       >
         {imagenes[0].titulo}
       </figcaption>
     </figure>
     <button
-      class="absolute top-1/2 left-4 z-10 grid size-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full border border-sky/30 bg-brand-deep/75 text-3xl text-ice transition-colors hover:bg-brand-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky max-[600px]:left-2"
+      class="absolute top-1/2 left-4 z-10 grid size-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full border border-sky/30 bg-brand-deep/75 text-3xl text-text-on-inverse transition-colors hover:bg-brand-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky max-[600px]:left-2"
       type="button"
       aria-label="Imagen anterior"
       data-visor-anterior><span aria-hidden="true">‹</span></button
     >
     <button
-      class="absolute top-1/2 right-4 z-10 grid size-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full border border-sky/30 bg-brand-deep/75 text-3xl text-ice transition-colors hover:bg-brand-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky max-[600px]:right-2"
+      class="absolute top-1/2 right-4 z-10 grid size-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full border border-sky/30 bg-brand-deep/75 text-3xl text-text-on-inverse transition-colors hover:bg-brand-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky max-[600px]:right-2"
       type="button"
       aria-label="Imagen siguiente"
       data-visor-siguiente><span aria-hidden="true">›</span></button

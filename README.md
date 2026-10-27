@@ -20,6 +20,7 @@ Ingeniería Informática e Ingeniería en Sistemas · FICH · UAGRM.
 - [Sobre el proyecto](#sobre-el-proyecto)
 - [Información institucional](#información-institucional)
 - [Oferta académica](#oferta-académica)
+- [Proyectos académicos](#proyectos-académicos)
 - [Características](#características)
 - [Stack](#stack)
 - [Arquitectura](#arquitectura)
@@ -111,6 +112,7 @@ Página Astro
   -> Barra de navegación
   -> Hero institucional
   -> Carreras
+  -> Proyectos académicos
   -> Centros
   -> Más oportunidades
   -> Eventos
@@ -161,10 +163,16 @@ src/
 │   ├── galeria.ts
 │   ├── mallas.ts
 │   └── titulacion.ts
+├── lib/
+│   ├── api.ts
+│   └── proyectos-api.ts
 ├── pages/
 │   ├── index.astro
+│   ├── proyectos.astro
 │   └── carreras/
 │       └── [slug].astro
+├── tipos/
+│   └── proyectos.ts
 └── styles/
     └── global.css
 docs/
@@ -186,12 +194,21 @@ Los datos editables se encuentran en `src/datos/`:
 
 La base editorial y las decisiones institucionales se documentan en `docs/base.md`.
 
+## Proyectos académicos
+
+La portada muestra una selección de proyectos publicados y la ruta `/proyectos`
+ofrece búsqueda, filtros por tipo, autor, materia, año y mes, además de
+paginación. El detalle se consulta mediante `/proyectos/{uuid}`. La
+integración utiliza únicamente los endpoints públicos de proyectos de la API.
+
 Las rutas disponibles son:
 
 ```text
 /
 /carreras/informatica
 /carreras/sistemas
+/proyectos
+/proyectos/{uuid}
 ```
 
 ## Recursos visuales
@@ -250,6 +267,12 @@ pnpm dev
 ```
 
 La aplicación queda disponible en `http://localhost:4321`.
+
+Para habilitar los proyectos, configura la URL pública de la API:
+
+```env
+PUBLIC_INFOSIS_API_URL=http://localhost:8080/api/v1
+```
 
 ## Desarrollo
 

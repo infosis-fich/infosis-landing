@@ -40,13 +40,13 @@ const imagenesHero = [
 </HeroInterno>
 
 <dialog
-  class="registro-modal w-[min(100%_-_2rem,56rem)] max-w-none overflow-visible border border-line bg-paper p-0 text-ink shadow-[0_24px_80px_rgb(0_0_0_/_45%)] backdrop:bg-[rgb(3_10_16_/_78%)] backdrop:backdrop-blur-sm"
+  class="registro-modal w-[min(100%_-_2rem,56rem)] max-w-none overflow-visible border border-border-subtle bg-card-bg p-0 text-text-primary shadow-panel backdrop:bg-overlay backdrop:backdrop-blur-sm"
   data-registration-dialog
   aria-labelledby="registro-titulo"
 >
   <div class="max-h-[min(90svh,54rem)] overflow-y-auto p-5 sm:p-8">
     <div
-      class="mb-6 flex items-start justify-between gap-5 border-b border-line pb-5"
+      class="mb-6 flex items-start justify-between gap-5 border-b border-border-subtle pb-5"
     >
       <div>
         <p class="mb-2 text-xs font-bold tracking-[.14em] text-sky uppercase">
@@ -58,12 +58,12 @@ const imagenesHero = [
         >
           Registra tu trayectoria.
         </h2>
-        <p class="m-0 max-w-2xl text-sm leading-6 text-muted">
+        <p class="m-0 max-w-2xl text-sm leading-6 text-text-muted">
           Completa tus datos para mantenerte conectado.
         </p>
       </div>
       <button
-        class="grid size-10 shrink-0 place-items-center rounded-full border border-line text-xl text-muted transition-colors hover:border-sky hover:text-sky focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        class="grid size-10 shrink-0 place-items-center rounded-full border border-border-subtle text-xl text-text-muted transition-colors hover:border-sky hover:text-sky focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         type="button"
         data-close-registration
         aria-label="Cerrar formulario">×</button
@@ -77,7 +77,7 @@ const imagenesHero = [
         >
         <div class="flex gap-3 max-[520px]:flex-col">
           <input
-            class="min-w-0 flex-1 border border-line bg-paper px-4 py-3 text-ink outline-none transition-colors placeholder:text-muted focus:border-sky focus:ring-2 focus:ring-sky/30"
+            class="min-w-0 flex-1 border border-border-subtle bg-card-bg px-4 py-3 text-text-primary outline-none transition-colors placeholder:text-text-muted focus:border-sky focus:ring-2 focus:ring-sky/30"
             id="numero-registro"
             name="registro"
             autocomplete="off"
@@ -93,7 +93,7 @@ const imagenesHero = [
         </div>
       </div>
       <p
-        class="m-0 text-sm text-muted empty:hidden"
+        class="m-0 text-sm text-text-muted empty:hidden"
         data-lookup-status
         aria-live="polite"
       >
@@ -110,7 +110,9 @@ const imagenesHero = [
       <form id="registro-egresado" class="grid gap-6" novalidate>
         <input type="hidden" name="tokenPreRegistro" data-registration-token />
 
-        <fieldset class="grid gap-5 border-0 border-t border-line pt-6 p-0">
+        <fieldset
+          class="grid gap-5 border-0 border-t border-border-subtle pt-6 p-0"
+        >
           <EncabezadoFormulario
             titulo="Datos personales"
             descripcion="Comparte tus datos de contacto y residencia actual. Los campos marcados con * son obligatorios."
@@ -172,7 +174,7 @@ const imagenesHero = [
               </label>
               <div class="flex">
                 <span
-                  class="flex items-center gap-2 border border-r-0 border-line bg-tint px-3 text-sm text-muted"
+                  class="flex items-center gap-2 border border-r-0 border-border-subtle bg-surface-muted px-3 text-sm text-text-muted"
                   aria-label="Código de Bolivia"
                 >
                   <span class="bandera-bolivia" aria-hidden="true"></span>
@@ -216,7 +218,7 @@ const imagenesHero = [
         </fieldset>
 
         <fieldset
-          class="grid gap-5 border-0 border-t border-line pt-6 p-0"
+          class="grid gap-5 border-0 border-t border-border-subtle pt-6 p-0"
           data-careers-fieldset
         >
           <EncabezadoFormulario
@@ -226,7 +228,9 @@ const imagenesHero = [
           <div class="grid gap-4" data-careers></div>
         </fieldset>
 
-        <fieldset class="grid gap-5 border-0 border-t border-line pt-6 p-0">
+        <fieldset
+          class="grid gap-5 border-0 border-t border-border-subtle pt-6 p-0"
+        >
           <EncabezadoFormulario
             titulo="Situación profesional"
             descripcion="Indica tu ocupación actual y completa la información relacionada."
@@ -317,16 +321,16 @@ const imagenesHero = [
             </div>
           </div>
           <p
-            class="m-0 text-sm leading-6 text-muted"
+            class="m-0 text-sm leading-6 text-text-muted"
             data-occupation-help
             hidden
           >
           </p>
         </fieldset>
 
-        <div class="border-t border-line pt-6">
+        <div class="border-t border-border-subtle pt-6">
           <label
-            class="flex items-start gap-3 px-1 text-sm leading-6 text-muted"
+            class="flex items-start gap-3 px-1 text-sm leading-6 text-text-muted"
           >
             <input
               class="mt-1 size-4 accent-[var(--color-sky)]"
@@ -340,7 +344,7 @@ const imagenesHero = [
             >
           </label>
           <p
-            class="mt-3 min-h-0 text-sm text-muted empty:hidden"
+            class="mt-3 min-h-0 text-sm text-text-muted empty:hidden"
             data-registration-status
             aria-live="polite"
           >
@@ -360,15 +364,17 @@ const imagenesHero = [
         aria-live="polite"
       >
         <p class="mb-3 text-3xl text-sky" aria-hidden="true">✓</p>
-        <h3 class="mb-3 font-heading text-2xl font-semibold text-ice">
+        <h3
+          class="mb-3 font-heading text-2xl font-semibold text-text-on-inverse"
+        >
           ¡Registro completado!
         </h3>
-        <p class="mx-auto mb-6 max-w-lg text-sm leading-6 text-muted">
+        <p class="mx-auto mb-6 max-w-lg text-sm leading-6 text-text-muted">
           Gracias por compartir tu información y seguir conectado con la
           carrera.
         </p>
         <button
-          class="grid size-10 place-items-center rounded-full border border-line text-xl text-muted transition-colors hover:border-sky hover:text-sky focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky"
+          class="grid size-10 place-items-center rounded-full border border-border-subtle text-xl text-text-muted transition-colors hover:border-sky hover:text-sky focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky"
           type="button"
           data-new-registration
           aria-label="Buscar otro registro"
@@ -496,7 +502,7 @@ const imagenesHero = [
     if (!element) return;
     element.textContent = message;
     element.classList.toggle("text-accent", error);
-    element.classList.toggle("text-muted", !error);
+    element.classList.toggle("text-text-muted", !error);
   };
 
   const occupationSelect =
@@ -694,7 +700,7 @@ const imagenesHero = [
       const plan = document.createElement("input");
       const type = document.createElement("input");
 
-      card.className = "border border-line bg-paper p-4";
+      card.className = "border border-border-subtle bg-card-bg p-4";
       title.className =
         "mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 font-semibold";
       codeLabel.className =
@@ -702,7 +708,7 @@ const imagenesHero = [
       codeLabel.textContent = `${carrera.codigoCarrera}-${carrera.plan}`;
       careerName.textContent = carrera.carrera;
       careerType.className =
-        "rounded-full border border-line bg-tint px-2 py-0.5 text-xs font-semibold tracking-wide text-muted";
+        "rounded-full border border-border-subtle bg-surface-muted px-2 py-0.5 text-xs font-semibold tracking-wide text-text-muted";
       careerType.textContent =
         carrera.tipoCarrera === "PAR"
           ? "Carrera paralela"
@@ -802,17 +808,17 @@ const imagenesHero = [
         const documento = document.createElement("span");
         const profileInfo = document.createElement("div");
         const newSearch = document.createElement("button");
-        title.className = "mb-1 font-semibold text-ice";
+        title.className = "mb-1 font-semibold text-text-on-inverse";
         title.textContent = prellenado.nombre;
         details.className =
-          "flex flex-wrap items-center gap-x-3 text-sm leading-6 text-muted";
+          "flex flex-wrap items-center gap-x-3 text-sm leading-6 text-text-muted";
         registro.textContent = `Nro. de registro: ${prellenado.nroRegistro}`;
         separator.textContent = "·";
         separator.setAttribute("aria-hidden", "true");
         documento.textContent = `C.I.: ${prellenado.documentoIdentidad}`;
         profileInfo.className = "min-w-0";
         newSearch.className =
-          "grid size-9 shrink-0 place-items-center rounded-full border border-line text-xl text-muted transition-colors hover:border-sky hover:text-sky focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky";
+          "grid size-9 shrink-0 place-items-center rounded-full border border-border-subtle text-xl text-text-muted transition-colors hover:border-sky hover:text-sky focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky";
         newSearch.type = "button";
         newSearch.setAttribute("aria-label", "Buscar otro registro");
         newSearch.title = "Buscar otro registro";

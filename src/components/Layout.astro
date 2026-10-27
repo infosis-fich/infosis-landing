@@ -1,6 +1,5 @@
 ---
 import "../styles/global.css";
-import Analytics from "@vercel/analytics/astro";
 
 interface Props {
   title?: string;
@@ -66,6 +65,14 @@ const structuredData = {
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#091724" />
+    <script is:inline>
+      (() => {
+        try {
+          const tema = localStorage.getItem("theme");
+          document.documentElement.classList.toggle("light", tema === "light");
+        } catch {}
+      })();
+    </script>
     <meta name="robots" content={robots} />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
@@ -87,14 +94,13 @@ const structuredData = {
     <link rel="icon" href="/escudo-infosis.webp" type="image/webp" />
     <link rel="shortcut icon" href="/escudo-infosis.webp" type="image/webp" />
     <title>{title}</title>
-    <Analytics />
     <script
       type="application/ld+json"
       set:html={JSON.stringify(structuredData)}
     />
   </head>
   <body
-    class="m-0 min-w-[320px] bg-paper font-sans text-ink antialiased [font-synthesis:none] [text-rendering:optimizeLegibility]"
+    class="m-0 min-w-[320px] bg-main-bg font-sans text-text-primary antialiased [font-synthesis:none] [text-rendering:optimizeLegibility]"
   >
     <slot />
   </body>

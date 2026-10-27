@@ -4,7 +4,7 @@ import EncabezadoSeccion from "../EncabezadoSeccion.astro";
 ---
 
 <section
-  class="seccion-institucional relative overflow-hidden border-y border-line bg-tint"
+  class="seccion-institucional relative overflow-hidden border-y border-border-subtle bg-surface-muted"
   id="carreras"
   aria-labelledby="carreras-titulo"
 >
@@ -17,7 +17,7 @@ import EncabezadoSeccion from "../EncabezadoSeccion.astro";
     <div class="grid grid-cols-2 gap-5 max-[720px]:grid-cols-1">
       {
         carreras.map((carrera) => (
-          <article class="forma-acento group relative flex h-full flex-col overflow-hidden bg-paper p-7 transition-[box-shadow,transform] duration-300 hover:-translate-y-1 hover:shadow-lg motion-reduce:transition-none md:p-9">
+          <article class="forma-acento group relative flex h-full flex-col overflow-hidden bg-card-bg p-7 transition-[box-shadow,transform] duration-300 hover:-translate-y-1 hover:shadow-lg motion-reduce:transition-none md:p-9">
             <div
               class="absolute inset-x-0 top-0 h-1 bg-brand transition-colors group-hover:bg-sky"
               aria-hidden="true"
@@ -25,11 +25,11 @@ import EncabezadoSeccion from "../EncabezadoSeccion.astro";
             <h3 class="mb-3 font-display text-xl font-semibold leading-snug">
               {carrera.nombre}
             </h3>
-            <p class="mb-5 max-w-[38rem] text-sm leading-6 text-muted">
+            <p class="mb-5 max-w-[38rem] text-sm leading-6 text-text-muted">
               {carrera.resumen}
             </p>
             <a
-              class="mt-auto flex items-center justify-between gap-4 border-t border-line pt-4 font-semibold text-sky transition-colors group-hover:text-ink"
+              class="mt-auto flex items-center justify-between gap-4 border-t border-border-subtle pt-4 font-semibold text-sky transition-colors group-hover:text-text-primary"
               href={carrera.ruta}
             >
               Ver la carrera{" "}

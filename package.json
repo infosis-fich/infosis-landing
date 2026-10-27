@@ -9,13 +9,14 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "start": "node ./dist/server/entry.mjs",
     "check": "astro check",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/node": "^11.1.9",
     "@astrojs/sitemap": "^3.7.4",
-    "@vercel/analytics": "^2.0.1",
     "astro": "^7.3.3",
     "simple-icons": "^16.32.0"
   },
