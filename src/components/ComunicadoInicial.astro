@@ -1,0 +1,114 @@
+---
+
+---
+
+<dialog
+  class="registro-modal h-fit max-h-[80svh] w-fit max-w-[80vw] overflow-visible border-0 bg-transparent p-0 text-text-primary shadow-panel backdrop:bg-overlay backdrop:backdrop-blur-sm"
+  aria-label="Comunicados institucionales"
+  data-communication-dialog
+>
+  <div class="relative grid max-h-[80svh] max-w-[80vw] place-items-center">
+    <img
+      class="block max-h-[80svh] max-w-[80vw] object-contain"
+      data-communication-image
+      alt=""
+      decoding="async"
+    />
+    <button
+      class="absolute top-3 right-3 z-10 grid size-11 place-items-center rounded-full border border-sky/30 bg-brand-deep/85 text-2xl text-text-on-inverse shadow-lg transition-colors hover:bg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky max-[600px]:top-2 max-[600px]:right-2"
+      type="button"
+      data-communication-close
+      aria-label="Cerrar comunicado">×</button
+    >
+    <button
+      class="absolute top-1/2 left-3 z-10 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-sky/30 bg-brand-deep/85 text-3xl text-text-on-inverse shadow-lg transition-colors hover:bg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky disabled:hidden max-[600px]:left-2 max-[600px]:size-9 max-[600px]:text-2xl"
+      type="button"
+      data-communication-previous
+      aria-label="Comunicado anterior"
+      disabled
+    >
+      <span aria-hidden="true">‹</span>
+    </button>
+    <button
+      class="absolute top-1/2 right-3 z-10 grid size-11 -translate-y-1/2 place-items-center rounded-full border border-sky/30 bg-brand-deep/85 text-3xl text-text-on-inverse shadow-lg transition-colors hover:bg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky disabled:hidden max-[600px]:right-2 max-[600px]:size-9 max-[600px]:text-2xl"
+      type="button"
+      data-communication-next
+      aria-label="Siguiente comunicado"
+      disabled
+    >
+      <span aria-hidden="true">›</span>
+    </button>
+  </div>
+</dialog>
+
+<script>
+  import { listarComunicados } from "../lib/comunicados-api";
+  import type { Comunicado } from "../tipos/comunicados";
+
+  const dialog = document.querySelector<HTMLDialogElement>(
+    "[data-communication-dialog]",
+  );
+
+  if (dialog) {
+    const close = dialog.querySelector<HTMLButtonElement>(
+      "[data-communication-close]",
+    );
+    const previous = dialog.querySelector<HTMLButtonElement>(
+      "[data-communication-previous]",
+    );
+    const next = dialog.querySelector<HTMLButtonElement>(
+      "[data-communication-next]",
+    );
+    const image = dialog.querySelector<HTMLImageElement>(
+      "[data-communication-image]",
+    );
+    let comunicados: Comunicado[] = [];
+    let indice = 0;
+    const focoAnterior =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
+
+    const mostrar = (nuevoIndice: number) => {
+      if (!image || comunicados.length === 0) return;
+      indice = (nuevoIndice + comunicados.length) % comunicados.length;
+      const comunicado = comunicados[indice];
+      image.src = comunicado.imagenUrl;
+      image.alt = comunicado.destacado
+        ? "Comunicado destacado de la Dirección de Carrera de Informática y Sistemas"
+        : `Comunicado institucional ${indice + 1} de ${comunicados.length}`;
+      if (previous) previous.disabled = comunicados.length < 2;
+      if (next) next.disabled = comunicados.length < 2;
+    };
+
+    const cerrar = () => dialog.close();
+
+    close?.addEventListener("click", cerrar);
+    previous?.addEventListener("click", () => mostrar(indice - 1));
+    next?.addEventListener("click", () => mostrar(indice + 1));
+
+    // El cierre del comunicado está reservado exclusivamente al botón X.
+    dialog.addEventListener("cancel", (event) => event.preventDefault());
+    dialog.addEventListener("close", () => focoAnterior?.focus());
+
+    const iniciar = async () => {
+      try {
+        comunicados = await listarComunicados();
+        if (comunicados.length === 0) {
+          return;
+        }
+        const destacado = comunicados.findIndex(
+          (comunicado) => comunicado.destacado,
+        );
+        mostrar(destacado >= 0 ? destacado : 0);
+        await image?.decode();
+        dialog.showModal();
+        close?.focus();
+      } catch {
+        // La portada no debe depender de que el servicio de comunicados responda.
+      }
+    };
+
+    void iniciar();
+  }
+</script>
